@@ -14,6 +14,7 @@
     include("header.php");
     ?>
     <div class="main">
+        <!-- Detajet e Produktit -->
         <div class="small-container product-details">
             <div class="row">
                 <div class="col-2">
@@ -49,9 +50,7 @@
             </div>
         </div>
 
-
-        <!-- Similar Products -->
-
+        <!-- Produkte te ngjashme -->
         <div class="small-container">
             <div class="row row-2">
                 <h2>Produkte të ngjashme</h2>
@@ -93,12 +92,12 @@
             </div>
         </div>
     </div>
-
+    <!-- Brendet -->
     <div class="brands">
         <div class="brands-container">
             <div class="row">
                 <div class="col-5">
-                    <img src="images/logo-samsung.png" alt="" />
+                    <img src="images/logo-samsung.png" alt="Logo e Samsung" />
                 </div>
                 <div class="col-5">
                     <img src="images/logo-apple.png" alt="" />
@@ -115,65 +114,13 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col-1">
 
-                    <h3>TECHSHOP</h3>
-                    <p>
-                        Blej produkte online nga brendet më të njohura të teknologjisë.
-                    </p>
-                    <div class="app-logo">
+    <?php
+   include("footer.php");
+   ?>
 
-                    </div>
-                </div>
-                <div class="footer-col-2">
-
-                </div>
-                <div class="footer-col-3">
-                    <h3>Llogaria</h3>
-                    <ul>
-                        <li><a href="login.php">Kyçu</a></li>
-                        <li><a href="register.php">Regjistrohu</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col-4">
-                    <h3>Rreth nesh</h3>
-                    <ul>
-                        <li><a href="contact-us.php">Kontakt</a></li>
-                        <li><a href="about-us.php">Rreth Nesh </a></li>
-                        <li><a href="#">Termet dhe kushtet</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/app.js"></script>
-    <script src="js/zoom.js"></script>
-    <script>
-        var ProductImg = document.getElementById("ProductImg");
-        var smallImg = document.getElementsByClassName("small-img");
-        smallImg[0].onclick = function() {
-            ProductImg.src = smallImg[0].src;
-            smallImg[0].classList.add("selected-prodImg");
-            smallImg[1].classList.remove("selected-prodImg");
-            smallImg[2].classList.remove("selected-prodImg");
-        };
-        smallImg[1].onclick = function() {
-            ProductImg.src = smallImg[1].src;
-            smallImg[1].classList.add("selected-prodImg");
-            smallImg[0].classList.remove("selected-prodImg");
-            smallImg[2].classList.remove("selected-prodImg");
-        };
-        smallImg[2].onclick = function() {
-            ProductImg.src = smallImg[2].src;
-            smallImg[2].classList.add("selected-prodImg");
-            smallImg[0].classList.remove("selected-prodImg");
-            smallImg[1].classList.remove("selected-prodImg");
-        };
-    </script>
+    <script src="js/menu.js"></script>
+    <script src="js/product.js"></script>
 </body>
 
 
