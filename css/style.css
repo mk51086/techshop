@@ -191,7 +191,7 @@ p {
     padding-right: 25px;
 }
 
-.row {
+.products {
     margin-top: 0;
     display: flex;
     align-items: center;
@@ -320,6 +320,7 @@ p {
 .col-4 p {
     text-align: left;
     color: #252422;
+    font-size: medium;
     font-weight: 500;
 }
 
@@ -357,9 +358,6 @@ h4 {
     font-weight: normal;
 }
 
-.col-4 p {
-    font-size: 14px;
-}
 
 .rating .las {
     color: #6d6d6d;
@@ -557,7 +555,7 @@ ul {
     }
 }
 
-.page-btn span.active {
+.page-btn a.active {
     background-color: #1E212D;
     color: #fff;
 }
@@ -588,7 +586,7 @@ select:focus {
     margin: 0 auto 80px;
 }
 
-.page-btn span {
+.page-btn a {
     display: inline-block;
     border: 1px solid #1E212D;
     margin-left: 10px;
@@ -599,7 +597,7 @@ select:focus {
     cursor: pointer;
 }
 
-.page-btn span:hover {
+.page-btn a:hover {
     background: #1E212D;
     color: #fff;
 }

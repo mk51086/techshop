@@ -1,3 +1,11 @@
+<?php 
+session_start();
+include 'dbconnection.php';
+$pdo = pdo_connect_mysql();
+$stmt = $pdo->prepare('SELECT * FROM Products ORDER BY data DESC LIMIT 8');
+$stmt->execute();
+$recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
 
@@ -6,8 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
@@ -17,7 +28,7 @@
     <div class="main">
         <div class="slide-container">
             <div class="slide fade">
-                <a href="product" class="product-link"><img src="images/1.jpg" alt=""></a>
+                <a href="product.php" class="product-link"><img src="images/1.jpg" alt=""></a>
             </div>
             <div class="slide fade">
                 <img src="images/2.jpg" alt="">
@@ -32,74 +43,25 @@
             <a href="#" class="next"><i class="las la-angle-right la-2x" aria-hidden="true"></i></a>
         </div>
         <div class="small-container">
-            <h2 class="title">Produktet e fundit</h2>
+
+
             <div class="row">
-                <div class="col-4">
-                    <a class="product-link" href="product">
-                        <img src="images/products/product-16.jpg" alt="" />
-                        <h4>Laptop Lenovo ThinkPad P15s Gen 2, 15.6" 4K UHD</h4>
-                    </a>
-                    <p>700.00€</p>
-                </div>
+                <?php foreach ($recent_products as $product): ?>
 
                 <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-17.jpg" alt="" />
-                        <h4>Laptop Lenovo Legion 5 17ACH6H, 17.3'', AMD Ryzen 7 16GB RAM, 1TB SSD</h4>
+                    <a href="product.php?id=<?=$product['ProductID']?>" class="product-link">
+                        <img src="images/products/<?=$product['ProductID']?>-1.jpg" alt="<?=$product['Name']?>" />
+                        <h4><?=$product['Name']?></h4>
                     </a>
-                    <p>450.00€</p>
+                    <p><?=$product['Price']?>€</p>
                 </div>
+                <?php endforeach ?>
 
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-24.jpg" alt="" />
-                        <h4>Apple iPhone 12 Pro, 6.1" FHD+, 6GB RAM, 256GB</h4>
-                    </a>
-                    <p>900.00€</p>
-                </div>
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-25.jpg" alt="" />
-                        <h4>Laptop Apple MacBook Pro 13 (Touch Bar), M1, 8GB, 512GB 8-bërthamësh GPU</h4>
-                    </a>
-                    <p>1000.00€</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-26.jpg" alt="" />
-                        <h4>Laptop Apple MacBook Air 13, M1 8-bërthama, 8GB RAM, 256GB SSD, 7-bërthama GPU</h4>
-                    </a>
-                    <p>1050.00€</p>
-                </div>
-
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-21.jpg" alt="" />
-                        <h4> Apple iPhone 12 mini, 5.4" FHD+, 4GB RAM, 128GB</h4>
-                    </a>
-                    <p>1050.00€</p>
-                </div>
-
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-23.jpg" alt="" />
-                        <h4> Samsung Galaxy A22, 6.4 ", 4GB RAM, 64GB</h4>
-                    </a>
-                    <p>500.00€</p>
-                </div>
-                <div class="col-4">
-                    <a href="product" class="product-link">
-                        <img src="images/products/product-24.jpg" alt="" />
-                        <h4> Apple iPhone 12 Pro Max, 6.7" FHD+, 6GB RAM, 256GB</h4>
-                    </a>
-                    <p>123.00€</p>
-                </div>
             </div>
         </div>
+
         <div id="btndiv">
-            <a href="products"> <button class="btn">Te gjitha Produktet </button></a>
+            <a href="products.php"> <button class="btn">Te gjitha Produktet </button></a>
         </div>
 
         <div class="testimonial">
@@ -107,7 +69,8 @@
                 <div class="row">
                     <div class="col-3">
                         <p>
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget posuere diam, at semper mauris. In.
+                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                            Pellentesque eget posuere diam, at semper mauris. In.
                         </p>
                         <div class="rating">
                             <i class="las la-star"></i>
@@ -122,7 +85,8 @@
 
                     <div class="col-3">
                         <p>
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget posuere diam, at semper mauris. In.
+                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                            Pellentesque eget posuere diam, at semper mauris. In.
                         </p>
                         <div class="rating">
                             <i class="las la-star"></i>
@@ -137,7 +101,8 @@
 
                     <div class="col-3">
                         <p>
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget posuere diam, at semper mauris. In.
+                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                            Pellentesque eget posuere diam, at semper mauris. In.
                         </p>
                         <div class="rating">
                             <i class="las la-star"></i>
@@ -177,8 +142,8 @@
     <?php
    include("footer.php");
    ?>
-        <script src="js/menu.js"></script>
-        <script src="js/slider.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/slider.js"></script>
 </body>
 
 </html>
