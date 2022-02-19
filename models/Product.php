@@ -23,14 +23,8 @@ include_once("Database.php");
         $stmt = $this->db->conn->query($query);
         $products = [];
         while ($row = $stmt->fetch()) {
-            $product = new Product();
-            $product->id = $row['ProductID'];
-            $product->name = $row['Name'];
-            $product->desc = $row['Description'];
-            $product->price = $row['Price'];
-            $product->data = $row['data'];
-            $product->quantity = $row['quantity'];
-            array_push($products, $product);
+            $product = $this->createProduct($row);
+            $products[] = $product;
         }
         return $products;
     }
@@ -50,14 +44,8 @@ include_once("Database.php");
         $stmt = $this->db->conn->query($query);
         $products = [];
         while ($row = $stmt->fetch()) {
-            $product = new Product();
-            $product->id = $row['ProductID'];
-            $product->name = $row['Name'];
-            $product->desc = $row['Description'];
-            $product->price = $row['Price'];
-            $product->data = $row['data'];
-            $product->quantity = $row['quantity'];
-            array_push($products, $product);
+            $product = $this->createProduct($row);
+            $products[] = $product;
         }
         return $products;
     }
@@ -70,15 +58,36 @@ include_once("Database.php");
         $stmt->execute();  
         $product = null;
         while ($row = $stmt->fetch()) {
-            $product = new Product();
-         	$product->id = $row['ProductID'];
-            $product->name = $row['Name'];
-            $product->desc = $row['Description'];
-            $product->price = $row['Price'];
-            $product->data = $row['data'];
-            $product->quantity = $row['quantity'];
+            $product = $this->createProduct($row);
         }
         return $product;
     }
 
-}   
+
+
+
+     public function getProductsPage($v1,$v2){
+         $query = "SELECT * FROM " . Product::$table_name . " ORDER BY data DESC LIMIT ?,?";
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $v1, PDO::PARAM_INT);
+         $stmt->bindParam(2, $v2, PDO::PARAM_INT);
+         $stmt->execute();
+         $products = [];
+         while ($row = $stmt->fetch()) {
+             $product = $this->createProduct($row);
+             $products[]=$product;
+         }
+         return $products;
+     }
+     public function createProduct($row)
+     {
+         $product = new Product();
+         $product->id = $row['ProductID'];
+         $product->name = $row['Name'];
+         $product->desc = $row['Description'];
+         $product->price = $row['Price'];
+         $product->data = $row['data'];
+         $product->quantity = $row['quantity'];
+         return $product;
+     }
+ }
