@@ -1,3 +1,21 @@
+<?php
+
+include_once 'init.php';
+$u = new User();
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if ($u->loginUser($email, $password)) {
+         header("refresh:3;url=index.php");
+    }
+	$error = $u->getNotification(Notification::$loginError);
+	$sukses = $u->getNotification(Notification::$loginSuccess);
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
 
@@ -10,7 +28,7 @@
 </head>
 
 <body>
-    <?php 
+    <?php
     include("header.php");
     ?>
     <div class="main">
@@ -19,39 +37,44 @@
             <div class="title">
                 Kyçu
             </div>
-            <form class="form" action="/index.php" id="login">
+            <form id="login" class="form" name="login" method="POST">
                 <div class="inputfield">
-                    <label>Email Adresa</label>
-                    <input type="text" class="input" id="email">
-                    <small>Error Message</small>
+                    <label for="email">Email Adresa</label>
+  				<input type="text" class="input" id="email" name="email" value="" ><br>                   
+			  <?php 
+					if(isset($error)){ ?>
+                    <small><?=$error?></small>
+<?php } ?>
                 </div>
                 <div class="inputfield">
-                    <label>Fjalëkalimi</label>
-                    <input type="password" class="input" id="password">
-                    <small>Error Message</small>
+                    <label for="password">Fjalëkalimi</label>
+                    <input type="password" class="input" id="password" name="password" value="" ><br>
+                        <?php 
+					if(isset($error)){ ?>
+                    <small><?=$error?></small>
+<?php } ?>
                 </div>
+
                 <div class="inputfield">
-                    <input type="submit" value="Kyçu" class="btn">
+                    <input type="submit" value="Kyçu" id="submit" name="login" class="btn">
+                    <small style="padding-left:25%;"></small>
                 </div>
-                <p>Nuk keni llogari?
+                <p>Nuk Keni llogari?
                     <a class="form-bottom-link" href="register.php">Regjistrohu</a>
                 </p>
                 <div class="success-div">
-                    <span id="success"></span>
+	<?php 
+					if(isset($sukses)){ ?>
+                    <span id="success"><?=$sukses?></span>
+<?php } ?>
                 </div>
             </form>
         </div>
     </div>
     <?php
-   include("footer.php");
-   ?>
+    include("footer.php");
+    ?>
     <script src="js/menu.js"></script>
-    <script src="js/validate.js"></script>
 </body>
-
-
-
-
-
 
 </html>

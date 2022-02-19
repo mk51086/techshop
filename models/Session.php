@@ -4,6 +4,11 @@
 class Session
 {
 
+ public static function setUserIfLogged($user)
+    {
+        $_SESSION['email'] = $user;
+    }
+
     public static function start()
     {
         ob_start();
@@ -14,6 +19,8 @@ class Session
     {
         session_destroy();
     }
+
+ 
 
 }
 

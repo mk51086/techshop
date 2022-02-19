@@ -4,6 +4,8 @@ include_once 'init.php';
 $pd=new Product();
 $product = $pd->getProduct($_GET['id']);
 
+$recommended = $pd->getRecommended($_GET['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">

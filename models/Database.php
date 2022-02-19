@@ -5,7 +5,7 @@ class Database
 {	
     public $conn;
 	protected $config;
-
+private static $db = null;
     public function __construct()
     {
         $this->setConfig();
@@ -36,5 +36,14 @@ class Database
     {
         $this->config = include isset($_SERVER['REQUEST_URI']) ? __DIR__.'/../config/db_info.php' : __DIR__.'/config/db_info.php';
     }
+
+  public static function instance()
+    {
+        if (Database::$db === null) {
+            Database::$db = new Database();
+        }
+        return Database::$db;
+    }
+
 
 }

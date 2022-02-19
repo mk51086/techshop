@@ -79,8 +79,24 @@ include_once("Database.php");
          }
          return $products;
      }
-     public function createProduct($row)
-     {
+     
+    public function getRecommended($id){
+            $query = "SELECT * FROM " . Product::$table_name . " WHERE ProductID != ?  ORDER BY RAND() LIMIT 4";
+            $stmt = $this->db->conn->prepare($query);
+            $stmt->bindParam(1, $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $products = [];
+
+     while ($row = $stmt->fetch()) {
+             $product = $this->createProduct($row);
+             $products[] = $product;
+         }
+         return $products;
+    }
+ 
+
+     public function createProduct($row){
+
          $product = new Product();
          $product->id = $row['ProductID'];
          $product->name = $row['Name'];
@@ -90,4 +106,6 @@ include_once("Database.php");
          $product->quantity = $row['quantity'];
          return $product;
      }
+     
+   
  }

@@ -12,9 +12,15 @@
                         <li><a href="products.php">Produktet</a></li>
                         <li><a href="about-us.php">Rreth nesh</a></li>
                         <li><a href="contact-us.php">Kontakti</a></li>
-                        <li><a href="login.php" id="loginlink">Kyçu</a></li>
-                        <li><a href="register.php">Regjistrohu</a></li>
-
+						  <?php
+                    if (isset($_SESSION['email'])) {
+                        echo "<li><a href='logout.php' id='loginlink'>Dil</a></li>";
+                   	 } else {
+                        echo "
+                                    <li><a href='login.php' id='loginlink'>Kyçu</a></li>
+                                    <li><a href='register.php'>Regjistrohu</a></li>";
+                    }
+                    ?>
                     </ul>
                 </nav>
                 <img src="images/menu.png" alt="" class="menu-icon" id="menuBtn" />
