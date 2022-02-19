@@ -36,7 +36,7 @@ if (isset($_POST['login'])) {
             <div class="title">
                 Kyçu
             </div>
-            <form id="login" class="form" name="login" method="POST">
+            <form id="login" class="form" method="POST">
                 <div class="inputfield">
                     <label for="email">Email Adresa</label>
   				<input type="text" class="input" id="email" name="email" value="" ><br>                   

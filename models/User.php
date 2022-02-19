@@ -4,21 +4,17 @@ include_once("Database.php");
 class User{
 public static $table_name = 'users';    
 private $db;
-private $id;
-private $emri;
-private $pass;
-private $email ;
-private $mbiemri;
+public $id;
+public $emri;
+public $pass;
+public $email ;
+public $mbiemri;
 private static $notifications = [];
 
 public function __construct (){
 $this->db=new Database();
 }
 
-  public static function db()
-    {
-        return Database::instance();
-    }
 
 public function UserExists($email){
     $query = "SELECT * FROM ".User::$table_name. " where email = ?";
@@ -78,14 +74,14 @@ public function UserExists($email){
         Session::end();
     }
 
-    public static function register($emri, $mbiemri, $email, $password, $passwordConfirm)
+    public function register($emri, $mbiemri, $email, $password, $passwordConfirm)
     {
         self::validateEmail($email);
         self::validateName($emri);
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
         if (empty(self::$notifications) == true) {
-            self::db()->addUser($emri, $mbiemri, $email, self::passwordHash($password));
+            $this->db->addUser($emri,$mbiemri,self::passwordHash($password),$email);
         } else 
             return false;
         }
@@ -104,14 +100,14 @@ public function UserExists($email){
         }
 
     }   
-     private static function validateEmail($email)
+     private function validateEmail($email)
     {
         if (empty($email)) {
             array_push(self::$notifications, Notification::$emailZbrazetmsg);
             return;
         }
 
-        if (self::db()->isUserEmailExists($email)) {
+        if ($this->db->isUserEmailExists($email)) {
             array_push(self::$notifications, Notification::$emailEkziston);
             return;
         }
@@ -122,7 +118,51 @@ public function UserExists($email){
         }
     }
 
+    private static function validateLastname($lastname)
+    {
+        if (empty($lastname)) {
+            array_push(self::$notifications, Notification::$MbiEmriZbrazetmsg);
+            return;
+        }
+
+        if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
+            array_push(self::$notifications, Notification::$MbiemriLettersOnly);
+            return;
+        }
+    }
 
 
+    private static function validatePassword($password, $passwordConfirm)
+    {
+        if (empty($password)) {
+            array_push(self::$notifications, Notification::$passwordZbrazet);
+            return;
+        }
+
+        if ($password != $passwordConfirm) {
+            array_push(self::$notifications, Notification::$passwordGabim);
+            return;
+        }
+
+        if (strlen($password) < 8 || strlen($password) > 25) {
+            array_push(self::$notifications, Notification::$passwordLength);
+            return;
+        }
+
+        if (!preg_match("#[0-9]+#", $password)) {
+            array_push(self::$notifications, Notification::$passwordPaNumer);
+            return;
+        }
+
+        if (!preg_match("#[A-Z]+#", $password)) {
+            array_push(self::$notifications, Notification::$passwordPaShkronja);
+            return;
+        }
+    }
+
+    public static function passwordHash($password)
+    {
+        return password_hash($password, PASSWORD_BCRYPT, ['cost' > 12]);
+    }
 
 }

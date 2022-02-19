@@ -18,4 +18,5 @@ class Notification
     public static $passwordLength = 'Passwordi duhet te jete mes 8-25 karaktere!';
 	public static $passwordPaNumer = 'Password duhet te permbaje se paku nje numer!';
     public static $passwordPaShkronja = 'Password duhet te permbaj se paku nje shkronje te madhe!';
+	public static $registrationSuccess = 'Regjisrimi u krye me sukses!';
 }

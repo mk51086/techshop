@@ -48,15 +48,24 @@ private static $db = null;
 
     public function addUser($emri, $mbiemri, $password, $email)
     {
-        $query = "INSERT INTO " . User::$table_name . "(email, password, emri, `mbiemri`) VALUES(?,?,?,?)";
+        $query = "INSERT INTO users VALUES(NULL,?,?,?,?)";
+
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(2, $emri, PDO::PARAM_STR);
-        $stmt->bindParam(3, $mbiemri, PDO::PARAM_STR);
-        $stmt->bindParam(4, $password, PDO::PARAM_STR);
-        $stmt->bindParam(5, $email, PDO::PARAM_STR);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->bindParam(2, $password, PDO::PARAM_STR);
+        $stmt->bindParam(3, $emri, PDO::PARAM_STR);
+        $stmt->bindParam(4, $mbiemri, PDO::PARAM_STR);
         return $stmt->execute();
     }
 
+  public function isUserEmailExists($email)
+    {
+        $query = "SELECT email FROM " . User::$table_name . " WHERE email = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
 
 
 }
