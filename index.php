@@ -1,10 +1,5 @@
-<?php 
-session_start();
-include 'dbconnection.php';
-$pdo = pdo_connect_mysql();
-$stmt = $pdo->prepare('SELECT * FROM Products ORDER BY data DESC LIMIT 8');
-$stmt->execute();
-$recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+<?php
+include 'init.php';
 ?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
@@ -14,15 +9,12 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <?php 
+    <?php
     include("header.php");
     ?>
     <div class="main">
@@ -46,15 +38,19 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
             <div class="row">
-                <?php foreach ($recent_products as $product): ?>
+                <?php 
+					 $pd=new Product();
+                    $products = $pd->getNumProducts(8);
 
-                <div class="col-4">
-                    <a href="product.php?id=<?=$product['ProductID']?>" class="product-link">
-                        <img src="images/products/<?=$product['ProductID']?>-1.jpg" alt="<?=$product['Name']?>" />
-                        <h4><?=$product['Name']?></h4>
-                    </a>
-                    <p><?=$product['Price']?>€</p>
-                </div>
+					foreach ($products as $product) : ?>
+
+                    <div class="col-4">
+                        <a href="product.php?id=<?= $product->id ?>" class="product-link">
+                            <img src="images/products/<?= $product->id ?>-1.jpg" alt="<?= $product->name ?>" />
+                            <h4><?= $product->name?></h4>
+                        </a>
+                        <p><?= $product->price ?>€</p>
+                    </div>
                 <?php endforeach ?>
 
             </div>
@@ -140,8 +136,8 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
     <?php
-   include("footer.php");
-   ?>
+    include("footer.php");
+    ?>
     <script src="js/menu.js"></script>
     <script src="js/slider.js"></script>
 </body>
