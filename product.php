@@ -1,27 +1,9 @@
 <?php
-session_start();
-include 'dbconnection.php';
-$pdo = pdo_connect_mysql();
-// Kontrollo nese parametri id gjendet ne URL
-if (isset($_GET['id'])) {
-    // Perdorim prepare per te mbrojtur faqen nga SQL Injection
-    $stmt = $pdo->prepare('SELECT * FROM Products WHERE ProductID = ?');
-    $stmt2 = $pdo->prepare('SELECT * FROM Products WHERE ProductID != ? ORDER BY RAND() LIMIT 4');
-    $stmt->execute([$_GET['id']]);
-    $stmt2->execute([$_GET['id']]);
-    // Merr produktet nga databaza dhe ruaj rezultatin ne Array
-    $product = $stmt->fetch(PDO::FETCH_ASSOC);
-    $recommended = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-    // Kontrollo nese produkti ekziston
-    if (!$product) {
-        // Shfaq mesazhin nese produkti nuk ekziston
-        exit('Produkti nuk ekziston!');
-    }
-} else {
-    // Shfaq mesazhin nese id e produktit nuk eshte vendosur ne URL
-    exit('Produkti nuk ekziston!');
-}
-$pdo = null;
+
+include_once 'init.php';
+$pd=new Product();
+$product = $pd->getProduct($_GET['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
@@ -46,37 +28,37 @@ $pdo = null;
             <div class="row">
                 <div class="col-2">
 
-                    <div class="prodimg-div" id="prodarea"><img src="images/products/<?=$product['ProductID']?>-1.jpg"
-                            id="ProductImg" alt="<?=$product['Name']?>" /></div>
+                    <div class="prodimg-div" id="prodarea"><img src="images/products/<?=$product->id?>-1.jpg"
+                            id="ProductImg" alt="<?=$product->name?>" /></div>
 
                     <div class="small-img-row">
                         <div class="small-img-col">
-                            <img src="images/products/<?=$product['ProductID']?>-1.jpg"
-                                class="small-img selected-prodImg" alt="<?=$product['Name']?>" />
+                            <img src="images/products/<?=$product->id?>-1.jpg"
+                                class="small-img selected-prodImg" alt="<?=$product->name?>" />
                         </div>
                         <div class="small-img-col">
-                            <img src="images/products/<?=$product['ProductID']?>-2.jpg" class="small-img"
-                                alt="<?=$product['Name']?>">
+                            <img src="images/products/<?=$product->id?>-2.jpg" class="small-img"
+                                alt="<?=$product->name?>">
                         </div>
                         <div class="small-img-col">
-                            <img src="images/products/<?=$product['ProductID']?>-3.jpg" class="small-img"
-                                alt="<?=$product['Name']?>">
+                            <img src="images/products/<?=$product->id?>-3.jpg" class="small-img"
+                                alt="<?=$product->name?>">
                         </div>
 
                     </div>
                 </div>
                 <div class="col-2">
-                    <h2><?=$product['Name']?></h2>
-                    <h4><?=$product['Price']?>€</h4>
+                    <h2><?=$product->name?></h2>
+                    <h4><?=$product->price?>€</h4>
 
                     <label for="sasia" id="lblsasia">Sasia: </label><input id="input-sasia" type="number" value="1"
-                        min="1" max="<?=$product['quantity']?>" />
+                        min="1" max="<?=$product->quantity?>" />
                     <a href="" class="btn">BLEJ</a>
                     <h3>Përshkrimi i produktit
                     </h3>
                     <br />
                     <p>
-                        <?=$product['Description']?> </p>
+                        <?=$product->desc?> </p>
                 </div>
             </div>
         </div>
@@ -93,11 +75,11 @@ $pdo = null;
                 <?php foreach ($recommended as $r): ?>
 
                 <div class="col-4">
-                    <a href="product.php?id=<?=$r['ProductID']?>" class="product-link">
-                        <img src="images/products/<?=$r['ProductID']?>-1.jpg" alt="<?=$r['Name']?>" />
-                        <h4><?=$r['Name']?></h4>
+                    <a href="product.php?id=<?=$r->id?>" class="product-link">
+                        <img src="images/products/<?=$r->id?>-1.jpg" alt="<?=$r->name?>" />
+                        <h4><?=$r->name?></h4>
                     </a>
-                    <p><?=$r['Price']?>€</p>
+                    <p><?=$r->price?>€</p>
                 </div>
                 <?php endforeach ?>
 

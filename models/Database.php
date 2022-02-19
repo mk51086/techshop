@@ -26,7 +26,7 @@ class Database
         try {
             $this->conn = new PDO($dsn, $this->getConfig('user'), $this->getConfig('password'));
             $this->conn->exec("set names utf8");
-        } catch (PDOException $exception) {
+        } catch (PDOException $e) {
              print 'Lidhja me Databaze deshtoi: <br>'.$e->getMessage();
             die();
         }
