@@ -46,4 +46,17 @@ private static $db = null;
     }
 
 
+    public function addUser($emri, $mbiemri, $password, $email)
+    {
+        $query = "INSERT INTO " . User::$table_name . "(email, password, emri, `mbiemri`) VALUES(?,?,?,?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(2, $emri, PDO::PARAM_STR);
+        $stmt->bindParam(3, $mbiemri, PDO::PARAM_STR);
+        $stmt->bindParam(4, $password, PDO::PARAM_STR);
+        $stmt->bindParam(5, $email, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
+
+
+
 }

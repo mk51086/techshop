@@ -15,7 +15,10 @@ public function __construct (){
 $this->db=new Database();
 }
 
-
+  public static function db()
+    {
+        return Database::instance();
+    }
 
 public function UserExists($email){
     $query = "SELECT * FROM ".User::$table_name. " where email = ?";
@@ -75,6 +78,51 @@ public function UserExists($email){
         Session::end();
     }
 
+    public static function register($emri, $mbiemri, $email, $password, $passwordConfirm)
+    {
+        self::validateEmail($email);
+        self::validateName($emri);
+        self::validateLastname($mbiemri);
+        self::validatePassword($password, $passwordConfirm);
+        if (empty(self::$notifications) == true) {
+            self::db()->addUser($emri, $mbiemri, $email, self::passwordHash($password));
+        } else 
+            return false;
+        }
     
+    
+    private static function validateName($emri)
+    {
+        if (empty($emri)) {
+            array_push(self::$notifications, Notification::$emriZbrazetmsg);
+            return;
+        }
+        
+        if (!preg_match("/^[a-zA-Z ]*$/", $emri)) {
+            array_push(self::$notifications, Notification::$emriLettersOnly);
+            return;
+        }
+
+    }   
+     private static function validateEmail($email)
+    {
+        if (empty($email)) {
+            array_push(self::$notifications, Notification::$emailZbrazetmsg);
+            return;
+        }
+
+        if (self::db()->isUserEmailExists($email)) {
+            array_push(self::$notifications, Notification::$emailEkziston);
+            return;
+        }
+
+        if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
+            array_push(self::$notifications, Notification::$emailJoValide);
+            return;
+        }
+    }
+
+
+
 
 }
