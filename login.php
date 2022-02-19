@@ -12,7 +12,6 @@ if (isset($_POST['login'])) {
     }
 	$error = $u->getNotification(Notification::$loginError);
 	$sukses = $u->getNotification(Notification::$loginSuccess);
-
 }
 
 ?>
@@ -74,7 +73,6 @@ if (isset($_POST['login'])) {
     <?php
     include("footer.php");
     ?>
-    <script src="js/menu.js"></script>
 </body>
 
 </html>
