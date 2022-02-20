@@ -922,7 +922,6 @@ input:focus {
 #success {
     font-size: 15px;
     color: green;
-    visibility: hidden;
 }
 
 .success-div {

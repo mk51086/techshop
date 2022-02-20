@@ -64,7 +64,7 @@ if (isset($_POST['login'])) {
                 <div class="success-div">
 	<?php 
 					if(isset($sukses)){ ?>
-                    <span id="success"><?=$sukses?></span>
+                    <span class="success" style="color: green;"><?=$sukses?></span>
 <?php } ?>
                 </div>
             </form>
@@ -73,6 +73,7 @@ if (isset($_POST['login'])) {
     <?php
     include("footer.php");
     ?>
+  <script src="js/menu.js"></script>
 </body>
 
 </html>

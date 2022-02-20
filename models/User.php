@@ -32,11 +32,11 @@ public function UserExists($email){
         return $notification;
     }
 
-    public function getUserByUsername($username)
+    public function getUserbyEmail($email)
     {
         $query = "SELECT * FROM " . User::$table_name . " WHERE email = ?";
         $stmt = $this->db->conn->prepare($query);
-        $stmt->bindParam(1, $username, PDO::PARAM_STR);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $user = null;
         while ($row = $stmt->fetch()) {
@@ -54,13 +54,12 @@ public function UserExists($email){
     public function loginUser($email, $password)
     {
         
-        $user = $this->getUserByUsername($email);
-		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $user = $this->getUserbyEmail($email);
         if ($user == null) {
             self::$notifications[] = Notification::$loginError;
             return false;
         }
-        if(password_verify($user->pass, $hashed_password)) {
+        if(password_verify($password, $user->pass)) {
 			self::$notifications[] = Notification::$loginSuccess;
 			Session::setUserIfLogged($email);
             return true;
@@ -69,6 +68,10 @@ public function UserExists($email){
             return false;
         }
     }
+
+
+
+
     public static function logoutUser()
     {
         Session::end();
