@@ -84,7 +84,9 @@ public function UserExists($email){
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
         if (empty(self::$notifications) == true) {
+            self::$notifications[] = Notification::$registrationSuccess;
             $this->db->addUser($emri,$mbiemri,self::passwordHash($password),$email);
+            
         } else 
             return false;
         }

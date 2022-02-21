@@ -17,8 +17,16 @@ $password2 = $_POST['password2'];
 $email = $_POST['email'];
 
 $u->register($emri, $mbiemri, $email, $password1, $password2);
-}
 
+if($u->getNotification(Notification::$registrationSuccess)!=''){
+    $_SESSION['email'] = $email;
+    setcookie("email", $_SESSION['email'], time()+120);
+
+    header("refresh:3;url=index.php");
+    
+}
+$sukses = $u->getNotification(Notification::$registrationSuccess);
+}
 
 
 ?>
@@ -122,7 +130,10 @@ include("header.php");
                     <a class="form-bottom-link" href="login.php">Kyçuni</a>
                 </p>
                 <div class="success-div">
-                    <span id="success"></span>
+            	<?php 
+					if(isset($sukses)){ ?>
+                    <span class="success" style="color: green;"><?=$sukses?></span>
+<?php } ?>
                 </div>
             </form>
         </div>
