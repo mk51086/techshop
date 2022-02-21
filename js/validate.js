@@ -205,12 +205,7 @@ if (register) {
         e.preventDefault();
         checkTerms(kushtet)
         checkGjinia(gjinia)
-        if (checkRequired([emri, email, password, konfirmimi, mbiemri, gjinia]) &&
-            checkEmail(email) &&
-            checkLength(password, 8, 25) && checkPassword(password) &&
-            checkPasswordMatch(password, konfirmimi) &&
-            checkLength(emri, 3, 15) && lettersOnly(emri) &&
-            checkLength(mbiemri, 3, 15) && lettersOnly(mbiemri) && checkGjinia(gjinia) && checkTerms(kushtet)) {
+        if (checkGjinia(gjinia)) {
             register.reset();
             success();
         }

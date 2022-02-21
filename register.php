@@ -7,6 +7,8 @@ $mbiemri = '';
 $password1 = '';
 $password2 = '';
 $email = '';
+$gjinia='';
+$kushtet= '';
 
 if(isset($_POST['register'])){
 
@@ -15,8 +17,10 @@ $mbiemri = $_POST['mbiemri'];
 $password1 = $_POST['password'];
 $password2 = $_POST['password2'];
 $email = $_POST['email'];
+$gjinia = $_POST['gjinia'];
+$kushtet = isset($_POST['kushtet']);
 
-$u->register($emri, $mbiemri, $email, $password1, $password2);
+$u->register($emri, $mbiemri, $email, $password1, $password2,$gjinia,$kushtet);
 
 if($u->getNotification(Notification::$registrationSuccess)!=''){
     $_SESSION['email'] = $email;
@@ -27,7 +31,6 @@ if($u->getNotification(Notification::$registrationSuccess)!=''){
 }
 $sukses = $u->getNotification(Notification::$registrationSuccess);
 }
-
 
 ?>
 
@@ -105,24 +108,24 @@ include("header.php");
 </small>
                 </div>
                 <!-- Ka mbet me i shtu ne databaz dhe pastaj me i validu pastaj ne php -->
-                <!-- <div class="inputfield ">
+             <div class="inputfield ">
                 <label for="gjinia">Gjinia</label>
                 <div class="custom_select">
-                    <select name="gjinia" id="gjinia">
-                        <option value="">Zgjidhni</option>
-                        <option value="male">Mashkull</option>
-                        <option value="female">Femër</option>
+                    <select  name="gjinia" id="gjinia" > 
+                        <option value=""  <?php if($gjinia==''){ echo 'selected' ?> <?php }?>>Zgjidhni</option>
+                        <option value="m"  <?php if($gjinia=='m'){ echo 'selected' ?> <?php }?>>Mashkull</option>
+                        <option value="f" <?php if($gjinia=='f'){ echo 'selected' ?> <?php }?>>Femër</option>
+
                     </select>
-                    <small></small>
                 </div>
+             <small> <?php echo $u->getNotification(Notification::$gjiniaIsempty) ?></small>
             </div>
             <div class="inputfield terms">
-                <input name="kushtet" type="checkbox" id="kushtet"/>
-                <small></small>
-                <label> Pajtohem me <a class="linkr" href="#">kushtet e perdorimit</a>
-                </label>
+                <input type="checkbox" name="kushtet" id="kushtet" />
+                <small> <?php echo $u->getNotification(Notification::$kushtetPerdorimit) ?> </small>
+                <label> Pajtohem me <a class="linkr" href="#">kushtet e perdorimit</a></label>
 
-            </div> -->
+            </div> 
                 <div class="inputfield">
                     <input type="submit" value="Regjistrohu" id="submit" name="register" class="btn">
                 </div>
@@ -143,6 +146,7 @@ require_once("footer.php");
 ?>
 
 <script src="js/menu.js"></script>
+
 </body>
 
 

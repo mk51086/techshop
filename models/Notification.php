@@ -19,4 +19,7 @@ class Notification
 	public static $passwordPaNumer = 'Password duhet te permbaje se paku nje numer!';
     public static $passwordPaShkronja = 'Password duhet te permbaj se paku nje shkronje te madhe!';
 	public static $registrationSuccess = 'Regjisrimi u krye me sukses!';
+    public static $gjiniaIsempty = 'Ju lutem zgjidhni njeren nga gjinit!';
+    public static $kushtetPerdorimit= 'Duhet te pajtoheni me kushtet e perdorimit';
+
 }

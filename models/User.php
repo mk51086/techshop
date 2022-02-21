@@ -1,28 +1,33 @@
-<?php 
+<?php
 include_once("Database.php");
 
-class User{
-public static $table_name = 'users';    
-private $db;
-public $id;
-public $emri;
-public $pass;
-public $email ;
-public $mbiemri;
-private static $notifications = [];
+class User
+{
+    public static $table_name = 'users';
+    private $db;
+    public $id;
+    public $emri;
+    public $pass;
+    public $email;
+    public $mbiemri;
+    public $gjinia;
+    public $kushtet;
+    private static $notifications = [];
 
-public function __construct (){
-$this->db=new Database();
-}
+    public function __construct()
+    {
+        $this->db = new Database();
+    }
 
 
-public function UserExists($email){
-    $query = "SELECT * FROM ".User::$table_name. " where email = ?";
-    $stmt = $this->db->conn->prepare($query);
-    $stmt->bindParam(1,$email, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchColumn()>0;
-}
+    public function UserExists($email)
+    {
+        $query = "SELECT * FROM " . User::$table_name . " where email = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
 
     public function getNotification($notification)
     {
@@ -46,22 +51,21 @@ public function UserExists($email){
             $user->pass = $row['password'];
             $user->emri = $row['emri'];
             $user->mbiemri = $row['mbiemri'];
-      
         }
         return $user;
     }
 
     public function loginUser($email, $password)
     {
-        
+
         $user = $this->getUserbyEmail($email);
         if ($user == null) {
             self::$notifications[] = Notification::$loginError;
             return false;
         }
-        if(password_verify($password, $user->pass)) {
-			self::$notifications[] = Notification::$loginSuccess;
-			Session::setUserIfLogged($email);
+        if (password_verify($password, $user->pass)) {
+            self::$notifications[] = Notification::$loginSuccess;
+            Session::setUserIfLogged($email);
             return true;
         } else {
             self::$notifications[] = Notification::$loginError;
@@ -77,35 +81,35 @@ public function UserExists($email){
         Session::end();
     }
 
-    public function register($emri, $mbiemri, $email, $password, $passwordConfirm)
+    public function register($emri, $mbiemri, $email, $password, $passwordConfirm, $gjinia,$kushtet)
     {
         self::validateEmail($email);
         self::validateName($emri);
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
+        self::validateGjinia($gjinia);
+        self::validateKushtet($kushtet);
         if (empty(self::$notifications) == true) {
             self::$notifications[] = Notification::$registrationSuccess;
-            $this->db->addUser($emri,$mbiemri,self::passwordHash($password),$email);
-            
-        } else 
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
+        } else
             return false;
-        }
-    
-    
+    }
+
+
     private static function validateName($emri)
     {
         if (empty($emri)) {
             array_push(self::$notifications, Notification::$emriZbrazetmsg);
             return;
         }
-        
+
         if (!preg_match("/^[a-zA-Z ]*$/", $emri)) {
             array_push(self::$notifications, Notification::$emriLettersOnly);
             return;
         }
-
-    }   
-     private function validateEmail($email)
+    }
+    private function validateEmail($email)
     {
         if (empty($email)) {
             array_push(self::$notifications, Notification::$emailZbrazetmsg);
@@ -170,4 +174,18 @@ public function UserExists($email){
         return password_hash($password, PASSWORD_BCRYPT, ['cost' > 12]);
     }
 
+    public static function validateGjinia($gjinia)
+    {
+        if (empty($gjinia)) {
+            array_push(self::$notifications, Notification::$gjiniaIsempty);
+            return;
+        }
+    }
+
+    public static function validateKushtet($kushtet){
+        if ($kushtet==0) {
+            array_push(self::$notifications, Notification::$kushtetPerdorimit);
+            return;
+        }
+    }
 }
