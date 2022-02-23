@@ -1,3 +1,22 @@
+<?php
+include_once '../init.php';
+    $p= new Product();
+    $emri = '';
+    $desc = '';
+    $cmimi = '';
+    $sasia = '';
+    $file = '';
+    
+    if(isset($_POST['shtoProdukt'])){
+        $emri = $_POST['emri'];
+        $desc = $_POST['desc'];
+        $cmimi  = $_POST['cmimi'];
+        $sasia = $_POST['sasia'];
+        $p->addProduct($emri, $desc, $cmimi, $sasia,$_FILES);
+    }
+    
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -79,7 +98,7 @@
 
             <div class="details">
                 <div class="recentProducts">
-                    <form action="#">
+                    <form action="#" method="POST" enctype="multipart/form-data">
 
                         <header>
                             <h2>Shto nje produkt te ri</h2>
@@ -109,7 +128,12 @@
                                 <input name="sasia" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
-
+                        <div>
+                            <label class="desc">Foto e produktit</label>
+                            <div>
+                                <input name="image" type="file" class="field text fn" value="" size="8" tabindex="1">
+                            </div>
+                        </div>
                         <div>
                             <div>
                                 <input id="addProduct" name="shtoProdukt" type="submit" value="Shto Produktin">
@@ -117,6 +141,7 @@
 
                         </div>
 
+                        
                     </form>
                 </div>
 

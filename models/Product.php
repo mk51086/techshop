@@ -106,6 +106,28 @@ include_once("Database.php");
          $product->quantity = $row['quantity'];
          return $product;
      }
-     
+
+     public function addProduct($emri, $desc, $cmimi, $sasia,$file)
+    {
+      $permited  = array('jpg','jpeg','png','gif');
+         $file_name = $file['image']['name'];
+         $file_temp = $file['image']['tmp_name'];
+
+        $div = explode('.', $file_name);
+         $file_ext = strtolower(end($div));
+         $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+         $uploaded_image = "../admin/uploads/".$unique_image;
+         move_uploaded_file($file_temp, $uploaded_image);
+         $query = "INSERT INTO products (Name,Description,Price,quantity,image) VALUES(?,?,?,?,?)";
+         
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $emri, PDO::PARAM_STR);
+        $stmt->bindParam(2, $desc, PDO::PARAM_STR);
+        $stmt->bindParam(3, $cmimi, PDO::PARAM_STR);
+        $stmt->bindParam(4, $sasia, PDO::PARAM_STR);
+        $stmt->bindParam(5, $uploaded_image, PDO::PARAM_STR);
+       
+        return $stmt->execute();
+    }  
    
  }
