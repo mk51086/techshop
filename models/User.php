@@ -194,9 +194,24 @@ class User
         return password_hash($password, PASSWORD_BCRYPT, ['cost' > 12]);
     }
 
+private function validateEmailMsg($email)
+    {
+        if (empty($email)) {
+            array_push(self::$notifications, Notification::$emailZbrazetmsg);
+            return;
+        }
+
+        if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
+            array_push(self::$notifications, Notification::$emailJoValide);
+            return;
+        }
+    }
+
+
     public function contact($email, $emri, $tel, $msg)
     {
-        self::validateEmail($email);
+        
+		self::validateEmailMsg($email);
         self::validateName($emri);
         self::validateTel($tel);
         self::validateMsg($msg);

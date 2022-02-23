@@ -16,7 +16,6 @@ if (isset($_POST['contact'])) {
 
     $u->contact($email, $emri, $tel, $msg);
 }
-var_dump($email);
 
 
 ?>
@@ -41,7 +40,7 @@ include("header.php");
         <div class="title">
             Na Kontaktoni
         </div>
-        <form class="form" method="POST">
+        <form class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="inputfield">
                 <label for="email">Email Adresa</label>
                 <input name="email" type="text" class="input" id="email" value="<?= $email ?>">
