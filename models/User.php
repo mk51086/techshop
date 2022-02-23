@@ -10,15 +10,12 @@ class User
     public $pass;
     public $email;
     public $mbiemri;
-    public $gjinia;
-    public $kushtet;
     private static $notifications = [];
 
     public function __construct()
     {
         $this->db = new Database();
     }
-
 
     public function UserExists($email)
     {
@@ -51,6 +48,7 @@ class User
             $user->pass = $row['password'];
             $user->emri = $row['emri'];
             $user->mbiemri = $row['mbiemri'];
+
         }
         return $user;
     }
@@ -73,25 +71,19 @@ class User
         }
     }
 
-
-
-
     public static function logoutUser()
     {
         Session::end();
     }
 
-    public function register($emri, $mbiemri, $email, $password, $passwordConfirm, $gjinia,$kushtet)
+    public function register($emri, $mbiemri, $email, $password, $passwordConfirm)
     {
         self::validateEmail($email);
         self::validateName($emri);
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
-        self::validateGjinia($gjinia);
-        self::validateKushtet($kushtet);
         if (empty(self::$notifications) == true) {
-            self::$notifications[] = Notification::$registrationSuccess;
-            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email);
         } else
             return false;
     }
@@ -108,7 +100,9 @@ class User
             array_push(self::$notifications, Notification::$emriLettersOnly);
             return;
         }
+
     }
+
     private function validateEmail($email)
     {
         if (empty($email)) {
@@ -136,6 +130,32 @@ class User
 
         if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
             array_push(self::$notifications, Notification::$MbiemriLettersOnly);
+            return;
+        }
+    }
+
+    private static function validateTel($tel)
+    {
+        if (empty($tel)) {
+            array_push(self::$notifications, Notification::$telZbrazet);
+            return;
+        }
+
+        if (!preg_match("/^[\+]?[(]?[0-9]*$/", $tel)) {
+            array_push(self::$notifications, Notification::$telNrOnly);
+            return;
+        }
+    }
+
+    private static function validateMsg($msg)
+    {
+        if (empty($msg)) {
+            array_push(self::$notifications, Notification::$msgEmpty);
+            return;
+        }
+
+        if (strlen($msg) <10 || strlen($msg)>250) {
+            array_push(self::$notifications, Notification::$msgSize);
             return;
         }
     }
@@ -174,18 +194,16 @@ class User
         return password_hash($password, PASSWORD_BCRYPT, ['cost' > 12]);
     }
 
-    public static function validateGjinia($gjinia)
+    public function contact($email, $emri, $tel, $msg)
     {
-        if (empty($gjinia)) {
-            array_push(self::$notifications, Notification::$gjiniaIsempty);
-            return;
-        }
+        self::validateEmail($email);
+        self::validateName($emri);
+        self::validateTel($tel);
+        self::validateMsg($msg);
+        if (empty(self::$notifications) == true) {
+            $this->db->addMsg($emri, $email, $msg, $tel);
+        } else
+            return false;
     }
 
-    public static function validateKushtet($kushtet){
-        if ($kushtet==0) {
-            array_push(self::$notifications, Notification::$kushtetPerdorimit);
-            return;
-        }
-    }
 }
