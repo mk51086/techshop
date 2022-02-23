@@ -54,7 +54,6 @@ class Database
     public function addMsg($emri,$email,$msg,$tel){
         $query = "INSERT INTO mesazhet VALUES(NULL,?,?,?,?)";
         $stmt = $this->conn->prepare($query);
-var_dump($stmt);
         $stmt->bindParam(1, $emri, PDO::PARAM_STR);
         $stmt->bindParam(2, $email, PDO::PARAM_STR);
         $stmt->bindParam(3, $msg, PDO::PARAM_STR);

@@ -8,7 +8,6 @@ $tel = '';
 $msg = '';
 
 if (isset($_POST['contact'])) {
-    echo 'test';
     $emri = $_POST['emri'];
     $email = $_POST['email'];
     $tel = $_POST['tel'];
