@@ -79,14 +79,17 @@ class User
         Session::end();
     }
 
-    public function register($emri, $mbiemri, $email, $password, $passwordConfirm)
+    public function register($emri, $mbiemri, $email, $password, $passwordConfirm,$gjinia,$kushtet)
     {
         self::validateEmail($email);
         self::validateName($emri);
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
+		self::validateGjinia($gjinia);
+		self::validateKushtet($kushtet);
         if (empty(self::$notifications) == true) {
-            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email);
+			self::$notifications[] = Notification::$registrationSuccess;
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
         } else
             return false;
     }
@@ -105,6 +108,7 @@ class User
         }
 
     }
+
 
     private function validateEmail($email)
     {
@@ -244,6 +248,7 @@ private function validateEmailMsg($email)
         return $users;
     }
 
+
 public function createUser($row){
 
          $user = new User();
@@ -256,4 +261,18 @@ public function createUser($row){
          return $user;
      }
 
+ private static function validateGjinia($gjinia)
+    {
+        if (empty($gjinia)) {
+            array_push(self::$notifications, Notification::$gjiniaIsempty);
+            return;
+        }
+    }
+
+    private static function validateKushtet($kushtet){
+        if ($kushtet==0) {
+            array_push(self::$notifications, Notification::$kushtetPerdorimit);
+            return;
+        }
+    }
 }

@@ -40,15 +40,16 @@ class Database
 
 
 
-    public function addUser($emri, $mbiemri, $password, $email)
+    public function addUser($emri, $mbiemri, $password, $email,$gjinia)
     {
-        $query = "INSERT INTO users VALUES(NULL,?,?,?,?)";
+        $query = "INSERT INTO users(id,emri,mbiemri,password,email,gjinia) VALUES(NULL,?,?,?,?,?)";
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(1, $email, PDO::PARAM_STR);
-        $stmt->bindParam(2, $password, PDO::PARAM_STR);
-        $stmt->bindParam(3, $emri, PDO::PARAM_STR);
-        $stmt->bindParam(4, $mbiemri, PDO::PARAM_STR);
+        $stmt->bindParam(1, $emri, PDO::PARAM_STR);
+        $stmt->bindParam(2, $mbiemri, PDO::PARAM_STR);
+        $stmt->bindParam(3, $password, PDO::PARAM_STR);
+        $stmt->bindParam(4, $email, PDO::PARAM_STR);
+		$stmt->bindParam(5, $gjinia, PDO::PARAM_STR);
         return $stmt->execute();
     }
 //insert into mesazhet values (NULL,'test','asd@asd.com','hello there','+38344112332')
