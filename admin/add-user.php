@@ -140,7 +140,7 @@ include_once '../init.php';
                     </select>                            </div>
                         </div>
                         <div>
-                            <label class="desc">Foto e produktit</label>
+                            <label class="desc">Foto</label>
                             <div>
                                 <input name="img" type="file" class="field text fn" value="" size="8" tabindex="1">
                             </div>
