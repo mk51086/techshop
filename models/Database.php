@@ -52,6 +52,32 @@ class Database
 		$stmt->bindParam(5, $gjinia, PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+	 public function addUserImg($emri, $mbiemri, $password, $email,$gjinia,$file)
+    {
+         $permited  = array('jpg','jpeg','png','gif');
+         $file_name = $file['img']['name'];
+         $file_temp = $file['img']['tmp_name'];
+
+        $div = explode('.', $file_name);
+         $file_ext = strtolower(end($div));
+         $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+         $uploaded_image = "../admin/uploads/img/".$unique_image;
+         move_uploaded_file($file_temp, $uploaded_image);
+         $query = "INSERT INTO users (emri,mbiemri,password,email,gjinia,image) VALUES(?,?,?,?,?,?)";
+         
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $emri, PDO::PARAM_STR);
+        $stmt->bindParam(2, $mbiemri, PDO::PARAM_STR);
+        $stmt->bindParam(3, $password, PDO::PARAM_STR);
+        $stmt->bindParam(4, $email, PDO::PARAM_STR);
+		$stmt->bindParam(5, $gjinia, PDO::PARAM_STR);
+        $stmt->bindParam(6, $uploaded_image, PDO::PARAM_STR);
+       
+        return $stmt->execute();
+    }
+
+
 //insert into mesazhet values (NULL,'test','asd@asd.com','hello there','+38344112332')
     public function addMsg($emri,$email,$msg,$tel){
         $query = "INSERT INTO mesazhet VALUES(NULL,?,?,?,?)";

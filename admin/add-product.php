@@ -136,7 +136,7 @@ include_once '../init.php';
                         </div>
                         <div>
                             <div>
-                                <input id="addProduct" name="shtoProdukt" type="submit" value="Shto Produktin">
+                                <input class="addProd" name="shtoProdukt" type="submit" value="Shto Produktin">
                             </div>
 
                         </div>

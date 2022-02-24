@@ -1,23 +1,22 @@
 <?php
 include_once '../init.php';
-    $user= new User();
+    $db = Database::instance();
     $emri = '';
-    $pass = '';
-    $email = '';
     $mbiemri = '';
+    $password = '';
+    $email = '';
     $gjinia = '';
-	$img = '';
 
     if(isset($_POST['addUser'])){
         $emri = $_POST['emri'];
-        $desc = $_POST['desc'];
-        $cmimi  = $_POST['cmimi'];
-        $sasia = $_POST['sasia'];
-        $p->addProduct($emri, $desc, $cmimi, $sasia,$_FILES);
+        $mbiemri = $_POST['mbiemri'];
+        $password  = $_POST['password'];
+        $email = $_POST['email'];
+		$gjinia = $_POST['gjinia'];
+        $db->addUserImg($emri, $mbiemri, $password, $email,$gjinia,$_FILES);
     }
     
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -102,42 +101,53 @@ include_once '../init.php';
                     <form action="#" method="POST" enctype="multipart/form-data">
 
                         <header>
-                            <h2>Shto nje produkt te ri</h2>
+                            <h2>Shto user te ri</h2>
                         </header>
 
+
                         <div>
-                            <label class="desc" for="Field1">Emri Produktit</label>
+                            <label class="desc" >Emri</label>
                             <div>
                                 <input name="emri" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
-                            <label class="desc" for="Field1">Pershkrimi</label>
+                            <label class="desc" >Mbiemri</label>
                             <div>
-                                <input name="desc" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input name="mbiemri" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
-                            <label class="desc" for="Field1">Cmimi</label>
+                            <label class="desc" >Password</label>
                             <div>
-                                <input name="cmimi" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input name="password" type="password" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
-                            <label class="desc">Sasia</label>
+                            <label class="desc">Email</label>
                             <div>
-                                <input name="sasia" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input name="email" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
+                        </div>
+ <div>
+                            <label class="desc">Gjinia</label>
+                            <div>
+ 						<select  name="gjinia" id="gjinia" > 
+                        <option value=""  <?php if($gjinia==''){ echo 'selected' ?> <?php }?>>Zgjidhni</option>
+                        <option value="m"  <?php if($gjinia=='m'){ echo 'selected' ?> <?php }?>>Mashkull</option>
+                        <option value="f" <?php if($gjinia=='f'){ echo 'selected' ?> <?php }?>>Femër</option>
+
+                    </select>                            </div>
                         </div>
                         <div>
                             <label class="desc">Foto e produktit</label>
                             <div>
-                                <input name="image" type="file" class="field text fn" value="" size="8" tabindex="1">
+                                <input name="img" type="file" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <div>
-                                <input id="addUser" name="addUser" type="submit" value="Shto User">
+                                <input class="addProd" name="addUser" type="submit" value="Shto User">
                             </div>
 
                         </div>
