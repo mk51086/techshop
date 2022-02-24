@@ -3,6 +3,7 @@
 
 class Database
 {
+	private static $db = null;
     public $conn;
     protected $config;
     public function __construct()
@@ -69,6 +70,21 @@ class Database
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
+
+	public function totalMessages(){
+		$query = "SELECT * FROM mesazhet";
+        $stmt = $this->conn->query($query)->rowCount();
+        return $stmt;
+}
+
+   public static function instance()
+    {
+        if (Database::$db === null) {
+            Database::$db = new Database();
+        }
+        return Database::$db;
+    }
+
 
 
 }

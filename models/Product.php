@@ -40,7 +40,7 @@ include_once("Database.php");
 
 	 public function getNumProducts($numri)
     {
-        $query = "SELECT * FROM " . Product::$table_name . " LIMIT ".$numri;
+        $query = "SELECT * FROM " . Product::$table_name . " ORDER BY data DESC LIMIT ".$numri;
         $stmt = $this->db->conn->query($query);
         $products = [];
         while ($row = $stmt->fetch()) {
@@ -129,5 +129,6 @@ include_once("Database.php");
        
         return $stmt->execute();
     }  
+
    
  }

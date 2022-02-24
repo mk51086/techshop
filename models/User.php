@@ -10,6 +10,9 @@ class User
     public $pass;
     public $email;
     public $mbiemri;
+	public $gjinia;
+	public $data;
+	public $img;
     private static $notifications = [];
 
     public function __construct()
@@ -220,5 +223,37 @@ private function validateEmailMsg($email)
         } else
             return false;
     }
+
+	public function getTotalNumofUsers(){
+	  $query = "SELECT COUNT(*) FROM " . User::$table_name;
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->execute();
+		$num = $stmt->fetchColumn(); 
+		return $num;
+	}
+
+		 public function getNumofUsers($n)
+    {
+        $query = "SELECT * FROM " . User::$table_name . " LIMIT ".$n;
+        $stmt = $this->db->conn->query($query);
+        $users = [];
+        while ($row = $stmt->fetch()) {
+            $user = $this->createUser($row);
+            $users[] = $user;
+        }
+        return $users;
+    }
+
+public function createUser($row){
+
+         $user = new User();
+         $user->id = $row['id'];
+         $user->email = $row['email'];
+         $user->pass = $row['password'];
+         $user->emri = $row['emri'];
+         $user->mbiemri = $row['mbiemri'];
+         $user->gjinia = $row['gjinia'];
+         return $user;
+     }
 
 }
