@@ -6,6 +6,7 @@ class Database
 	private static $db = null;
     public $conn;
     protected $config;
+    public $error;
     public function __construct()
     {
         $this->setConfig();
@@ -53,7 +54,7 @@ class Database
         return $stmt->execute();
     }
 
-	 public function addUserImg($emri, $mbiemri, $password, $email,$gjinia,$file)
+/*	 public function addUserImg($emri, $mbiemri, $password, $email,$gjinia,$file)
     {
          $permited  = array('jpg','jpeg','png','gif');
          $file_name = $file['img']['name'];
@@ -65,7 +66,7 @@ class Database
          $uploaded_image = "../admin/uploads/img/".$unique_image;
          move_uploaded_file($file_temp, $uploaded_image);
          $query = "INSERT INTO users (emri,mbiemri,password,email,gjinia,image) VALUES(?,?,?,?,?,?)";
-         
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $emri, PDO::PARAM_STR);
         $stmt->bindParam(2, $mbiemri, PDO::PARAM_STR);
@@ -73,9 +74,9 @@ class Database
         $stmt->bindParam(4, $email, PDO::PARAM_STR);
 		$stmt->bindParam(5, $gjinia, PDO::PARAM_STR);
         $stmt->bindParam(6, $uploaded_image, PDO::PARAM_STR);
-       
+
         return $stmt->execute();
-    }
+    }*/
 
 
 //insert into mesazhet values (NULL,'test','asd@asd.com','hello there','+38344112332')
@@ -112,6 +113,14 @@ class Database
         return Database::$db;
     }
 
+    public function delete($query){
+        $delete_row = $this->conn->query($query) or die();
+        return $delete_row;
+    }
 
+    public function select($query){
+        $result = $this->conn->query($query) or die();
+            return $result;
+    }
 
 }

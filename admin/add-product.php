@@ -12,7 +12,19 @@ include_once '../init.php';
         $desc = $_POST['desc'];
         $cmimi  = $_POST['cmimi'];
         $sasia = $_POST['sasia'];
-        $p->addProduct($emri, $desc, $cmimi, $sasia,$_FILES);
+        $image_tmp = $_FILES['image']['tmp_name'];
+        $image = $_FILES['image']['name'];
+        $div = explode('.', $image);
+        $file_ext = strtolower(end($div));
+        $unique_img = File::makeImageUnique($file_ext);
+
+        $res = File::uploadProductImage($image_tmp, $unique_img);
+        if (!$res) {
+           echo 'error';
+        } else {
+            echo 'sukses';
+        }
+        $p->addProduct($emri, $desc, $cmimi, $sasia,$unique_img);
     }
     
 ?>
@@ -34,47 +46,48 @@ include_once '../init.php';
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="index.php">
                         <span class="icon"><i class="fa fa-laptop"></i></span>
                         <span class="title"><h2>TECHSHOP</h2></span>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="index.html">
+                    <a href="index.php">
+
                         <span class="icon"><i class="fa fa-home"></i></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="users.php">
 
                         <span class="icon"><i class="fa fa-users"></i></span>
                         <span class="title">Klientet</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="messages.php">
 
                         <span class="icon"><i class="fa fa-comment"></i></span>
                         <span class="title">Mesazhet</span>
                     </a>
                 </li>
                 <li>
-                    <a href="add-product.html">
+                    <a href="products.php">
 
                         <span class="icon"><i class="fa fa-shopping-cart"></i></span>
                         <span class="title">Produktet</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="accoumt.php">
 
                         <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                         <span class="title">Password</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="../logout.php">
 
                         <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
                         <span class="title">Sign Out</span>
@@ -82,7 +95,6 @@ include_once '../init.php';
                 </li>
             </ul>
         </div>
-
 
         <div class="main">
             <div class="topbar">
@@ -100,9 +112,11 @@ include_once '../init.php';
                 <div class="recentProducts">
                     <form action="#" method="POST" enctype="multipart/form-data">
 
-                        <header>
-                            <h2>Shto nje produkt te ri</h2>
-                        </header>
+                        <div class="cardHeader">
+                            <h2>Shto produkt te ri</h2>
+
+                            <a href="products.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Te gjitha produktet</a>
+                        </div>
 
                         <div>
                             <label class="desc" for="Field1">Emri Produktit</label>

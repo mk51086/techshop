@@ -1,6 +1,5 @@
 <?php
-include_once("Database.php");
-   
+
  class Product
 	{
 	private $db;
@@ -11,6 +10,7 @@ include_once("Database.php");
     public $price;
     public $data;
     public $quantity;
+    public $image;
 
 	    public function __construct ()
 		{
@@ -104,31 +104,34 @@ include_once("Database.php");
          $product->price = $row['Price'];
          $product->data = $row['data'];
          $product->quantity = $row['quantity'];
+         $product->image = $row['image'];
          return $product;
      }
 
-     public function addProduct($emri, $desc, $cmimi, $sasia,$file)
-    {
-      $permited  = array('jpg','jpeg','png','gif');
-         $file_name = $file['image']['name'];
-         $file_temp = $file['image']['tmp_name'];
 
-        $div = explode('.', $file_name);
-         $file_ext = strtolower(end($div));
-         $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-         $uploaded_image = "../admin/uploads/".$unique_image;
-         move_uploaded_file($file_temp, $uploaded_image);
+     public function addProduct($emri, $desc, $cmimi, $sasia,$image)
+     {
          $query = "INSERT INTO products (Name,Description,Price,quantity,image) VALUES(?,?,?,?,?)";
-         
-        $stmt = $this->db->conn->prepare($query);
-        $stmt->bindParam(1, $emri, PDO::PARAM_STR);
-        $stmt->bindParam(2, $desc, PDO::PARAM_STR);
-        $stmt->bindParam(3, $cmimi, PDO::PARAM_STR);
-        $stmt->bindParam(4, $sasia, PDO::PARAM_STR);
-        $stmt->bindParam(5, $uploaded_image, PDO::PARAM_STR);
-       
-        return $stmt->execute();
-    }  
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $emri, PDO::PARAM_STR);
+         $stmt->bindParam(2, $desc, PDO::PARAM_STR);
+         $stmt->bindParam(3, $cmimi, PDO::PARAM_STR);
+         $stmt->bindParam(4, $sasia, PDO::PARAM_STR);
+         $stmt->bindParam(5, $image, PDO::PARAM_STR);
+         return $stmt->execute();
+     }
 
-   
+     public function delProById($id)
+     {
+         $product = $this->getProduct($id);
+         File::deleteProductImage($product->image);
+         $query = "DELETE FROM " . Product::$table_name . " WHERE ProductID = ?";
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $id, PDO::PARAM_INT);
+         return $stmt->execute();
+     }
+
+
+
+
  }

@@ -94,6 +94,15 @@ class User
             return false;
     }
 
+    public function newUser($emri, $mbiemri, $email, $password,$gjinia)
+    {
+        if (empty(self::$notifications) == true) {
+            self::$notifications[] = Notification::$registrationSuccess;
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
+        } else
+            return false;
+    }
+
 
     private static function validateName($emri)
     {
@@ -239,6 +248,17 @@ private function validateEmailMsg($email)
 		 public function getNumofUsers($n)
     {
         $query = "SELECT * FROM " . User::$table_name . " LIMIT ".$n;
+        $stmt = $this->db->conn->query($query);
+        $users = [];
+        while ($row = $stmt->fetch()) {
+            $user = $this->createUser($row);
+            $users[] = $user;
+        }
+        return $users;
+    }
+
+    public function recentUsers($n){
+        $query = "SELECT * FROM " . User::$table_name . " ORDER BY data DESC LIMIT ".$n;
         $stmt = $this->db->conn->query($query);
         $users = [];
         while ($row = $stmt->fetch()) {

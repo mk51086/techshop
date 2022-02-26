@@ -276,7 +276,16 @@ input {
 }
 
 .details .recentProducts table tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #8d99ae;
+    border-left: solid 1px #8d99ae;
+    border-right: solid 1px #8d99ae;
+}
+
+.details .recentProducts table td {
+    border-bottom: 1px solid #8d99ae;
+    border-left: solid 1px #8d99ae;
+    border-right: solid 1px #8d99ae;
+    text-align: center;
 }
 
 .details .recentProducts table tbody tr:last-child {
@@ -554,4 +563,29 @@ textarea:focus {
     legend {
         text-align: right;
     }
+}
+
+.page-btn a.active {
+    background-color: #1E212D;
+    color: #fff;
+}
+
+.page-btn {
+    margin: 0 auto 80px;
+}
+
+.page-btn a {
+    display: inline-block;
+    border: 1px solid #1E212D;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.page-btn a:hover {
+    background: #1E212D;
+    color: #fff;
 }

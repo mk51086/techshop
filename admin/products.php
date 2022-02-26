@@ -1,12 +1,27 @@
 <?php
-include_once('../init.php');
-$product = new Product();
-$user = new User();
-$db = Database::instance();
-$num_users = $user->getTotalNumofUsers();
-$num_products = $product->totalRows();
-$total_msg = $db->totalMessages();
+include '../init.php';
+$pd=new Product();
+
+$num_products_on_each_page = 8;
+
+$current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+$v1 = ($current_page - 1) * $num_products_on_each_page;
+
+$products = $pd->getProductsPage($v1, $num_products_on_each_page);
+$total_products = $pd->totalRows();
+
+$total_pages = ceil($total_products / $num_products_on_each_page);
+
+if (isset($_GET['delpro'])) {
+    $id = $_GET['delpro'];
+    $delPro = $pd->delProById($id);
+    header('Location: products.php');
+}
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -18,7 +33,7 @@ $total_msg = $db->totalMessages();
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <title>TECHSHOP - Dashboard</title>
+    <title>TECHSHOP - Produktet</title>
 </head>
 
 <body>
@@ -31,7 +46,7 @@ $total_msg = $db->totalMessages();
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -52,7 +67,7 @@ $total_msg = $db->totalMessages();
                     <span class="title">Mesazhet</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="products.php">
 
                     <span class="icon"><i class="fa fa-shopping-cart"></i></span>
@@ -88,56 +103,25 @@ $total_msg = $db->totalMessages();
             </div>
         </div>
 
-        <div class="cardbox">
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $num_products ?></div>
-                    <div class="cardName">Produkte</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-shopping-cart" area-hidden="true"></i>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $total_msg ?></div>
-                    <div class="cardName">Mesazhe</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-comment" area-hidden="true"></i>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $num_users ?></div>
-                    <div class="cardName">Perdorues</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-users" area-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-
         <div class="details">
             <div class="recentProducts">
                 <div class="cardHeader">
-                    <h2>Produktet e fundit</h2>
-                    <a href="/products.php" class="btn">Te gjitha</a>
+                    <h2>Te Gjitha Produktet</h2>
+
+                    <a href="add-product.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Shto</a>
                 </div>
                 <table>
                     <thead>
                     <tr>
-                        <td>ID</td>
-                        <td>Emri</td>
-                        <td>Cmimi</td>
-                        <td>Data</td>
+                        <th>ID</th>
+                        <th>Emri</th>
+                        <th>Cmimi</th>
+                        <th>Data</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $products = $product->getNumProducts(10);
 
                     foreach ($products as $product) : ?>
                         <tr>
@@ -145,34 +129,33 @@ $total_msg = $db->totalMessages();
                             <td><?= $product->name ?></td>
                             <td><?= $product->price ?>€</td>
                             <td><?= $product->data ?></td>
+                            <td>
+                                <a href="edit-product.php?id=<?= $product->id ?>">Edit</a>
+                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $product->id ?>">Delete</a>
+                            </td>
                         </tr>
                     <?php endforeach ?>
 
                     </tbody>
                 </table>
-
             </div>
-            <div class="recentCustomers">
-                <div class="cardHeader">
-                    <h2>Klientet e fundit</h2>
-                </div>
-                <table class="customerstbl">
-                    <tbody>
-                    <?php $users = $user->recentUsers(10);
-                    foreach ($users
 
-                    as $user) : ?>
-                    <tr >
-                        <!-- <td width="60px">
-                            <div class="imgBx"><img src="img/1.jpg"></div>
-                        </td> -->
-                        <td><h4><?= $user->emri ?><br/><span><?= $user->data ?></span></h4></td>
-                    </tr>
-                    <tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        <div class="page-btn">
+            <?php if ($current_page > 1) : ?>
+                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $current_page) {
+                    echo "<a class='active'>" . $current_page . "</a>";
+                } else {
+                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
+                }
+            }
+            ?>
+            <?php if ($total_products > ($current_page * $num_products_on_each_page) - $num_products_on_each_page + count($products)) : ?>
+                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

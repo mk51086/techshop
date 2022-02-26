@@ -1,6 +1,6 @@
 <?php
 include_once '../init.php';
-    $db = Database::instance();
+    $u = new User();
     $emri = '';
     $mbiemri = '';
     $password = '';
@@ -13,7 +13,7 @@ include_once '../init.php';
         $password  = $_POST['password'];
         $email = $_POST['email'];
 		$gjinia = $_POST['gjinia'];
-        $db->addUserImg($emri, $mbiemri, $password, $email,$gjinia,$_FILES);
+        $u->newUser($emri, $mbiemri, $email, $password,$gjinia);
     }
     
 ?>
@@ -34,33 +34,33 @@ include_once '../init.php';
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="index.php">
                         <span class="icon"><i class="fa fa-laptop"></i></span>
                         <span class="title"><h2>TECHSHOP</h2></span>
                     </a>
                 </li>
                 <li class="active">
-                    <a href="index.html">
+                    <a href="index.php">
                         <span class="icon"><i class="fa fa-home"></i></span>
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="users.php">
 
                         <span class="icon"><i class="fa fa-users"></i></span>
                         <span class="title">Klientet</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="messages.php">
 
                         <span class="icon"><i class="fa fa-comment"></i></span>
                         <span class="title">Mesazhet</span>
                     </a>
                 </li>
                 <li>
-                    <a href="add-product.html">
+                    <a href="products.php">
 
                         <span class="icon"><i class="fa fa-shopping-cart"></i></span>
                         <span class="title">Produktet</span>
@@ -139,12 +139,14 @@ include_once '../init.php';
 
                     </select>                            </div>
                         </div>
-                        <div>
+                     <!--   <div>
                             <label class="desc">Foto</label>
                             <div>
                                 <input name="img" type="file" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
+                                                -->
+
                         <div>
                             <div>
                                 <input class="addProd" name="addUser" type="submit" value="Shto User">
