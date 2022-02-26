@@ -14,7 +14,7 @@ if (!$_SESSION['role']) {
     $file = '';
     $u = new User();
     $user = $u->getUserbyEmail($_SESSION['email']);
-    $userID = '';
+    $userID = $user->id;
     if(isset($_POST['submit'])){
         $id = $_GET['id'];
         $name = $_POST['name'];
