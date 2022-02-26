@@ -2,22 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="718e1977-068d-4378-9516-898d4647e379" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/uploads/sliders/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/sliders/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/sliders/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploads/sliders/4.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/add-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/add-product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/add-user.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/add-user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/edit-product.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/edit-product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/product_images/62e0e97c52.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/sliders.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sliders.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +62,7 @@
       <workItem from="1645299128501" duration="202000" />
       <workItem from="1645304881863" duration="49000" />
       <workItem from="1645736299101" duration="52000" />
-      <workItem from="1645856482758" duration="26682000" />
+      <workItem from="1645856482758" duration="27563000" />
     </task>
     <servers />
   </component>

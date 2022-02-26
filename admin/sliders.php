@@ -80,14 +80,14 @@ if (!$_SESSION['role']) {
                 </a>
             </li>
             <li class="active">
-                <a href="products.php">
+                <a href="sliders.php">
 
-                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                    <span class="icon"><i class="fa fa-eye"></i></span>
                     <span class="title">Sliders</span>
                 </a>
             </li>
             <li>
-                <a href="accoumt.php">
+                <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <span class="title">Password</span>

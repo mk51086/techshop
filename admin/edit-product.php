@@ -63,7 +63,7 @@ if (!$_SESSION['role']) {
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -92,7 +92,14 @@ if (!$_SESSION['role']) {
                 </a>
             </li>
             <li>
-                <a href="accoumt.php">
+                <a href="sliders.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Sliders</span>
+                </a>
+            </li>
+            <li>
+                <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <span class="title">Password</span>

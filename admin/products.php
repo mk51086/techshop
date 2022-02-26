@@ -80,7 +80,14 @@ if (isset($_GET['delpro'])) {
                 </a>
             </li>
             <li>
-                <a href="accoumt.php">
+                <a href="sliders.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Sliders</span>
+                </a>
+            </li>
+            <li>
+                <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                     <span class="title">Password</span>
