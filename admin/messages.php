@@ -4,23 +4,24 @@ if (!$_SESSION['role']) {
 echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';}else{
-$u=new user();
 
-$num_of_users = 8;
+$m=new messages();
+
+$num_of_messages = 8;
 
 $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
-$v1 = ($current_page - 1) * $num_of_users;
+$v1 = ($current_page - 1) * $num_of_messages;
 
-$users = $u->getUsersPage($v1, $num_of_users);
-$total_users = $u->totalRowsU();
+$mesazhet = $m->getMessagesPage($v1, $num_of_messages);
+$total_messages = $m->totalRowsM();
 
-$total_pages = ceil($total_users / $num_of_users);
+$total_messages = ceil($total_messages / $num_of_messages);
 
 if (isset($_GET['delpro'])) {
     $id = $_GET['delpro'];
-    $delPro = $u->deleleteUserById($id);
-    header('Location: Users.php');
+    $delPro = $m->deleteMessages($id);
+    header('Location: messages.php');
 }
 
 ?>
@@ -118,33 +119,31 @@ if (isset($_GET['delpro'])) {
         <div class="details">
             <div class="recentProducts">
                 <div class="cardHeader">
-                    <h2>Te Gjith Klientet</h2>
+                    <h2>Te Gjitha mesazhet</h2>
 
-                    <a href="add-user.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Shto</a>
                 </div>
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>Emri</th>
-                        <th>Mbiemri</th>
                         <th>Email</th>
-                        <th>gjinia</th>
+                        <th>mesazhi</th>
+                        <th>tel</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
 
-                    foreach ($users as $user) : ?>
+                    foreach ($mesazhet as $messages) : ?>
                         <tr>
-                            <td><?= $user->id ?></td>
-                            <td><?= $user->emri ?></td>
-                            <td><?= $user->mbiemri ?></td>
-                            <td><?= $user->email ?></td>
-                            <td><?= $user->gjinia ?></td>
+                            <td><?= $messages->ID ?></td>
+                            <td><?= $messages->emri ?></td>
+                            <td><?= $messages->email ?></td>
+                            <td><?= $messages->mesazhi ?></td>
+                            <td><?= $messages->tel ?></td>
                             <td>
-                                <a href="Edit-user.php?id=<?= $user->id ?>">Edit</a>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $user->id ?>">Delete</a>
+                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $messages->ID ?>">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -156,18 +155,18 @@ if (isset($_GET['delpro'])) {
         </div>
         <div class="page-btn">
             <?php if ($current_page > 1) : ?>
-                <a href="users.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+                <a href="messages.php?p=<?= $current_page - 1 ?>">&#8249;</a>
             <?php endif; ?>
-            <?php for ($i = 1; $i <= $total_pages; $i++) {
+            <?php for ($i = 1; $i <= $total_messages; $i++) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='users.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='messages.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>
-            <?php if ($total_users > ($current_page * $num_of_users) - $num_of_users + count($users)) : ?>
-                <a href="users.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+            <?php if ($total_messages > ($current_page * $num_of_messages) - $num_of_messages + count($mesazhet)) : ?>
+                <a href="messages.php?p=<?= $current_page + 1 ?>">&#8250;</a>
             <?php endif; ?>
         </div>
     </div>

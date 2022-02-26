@@ -315,6 +315,7 @@ class User
             array_push(self::$notifications, Notification::$kushtetPerdorimit);
         }
     }
+    
     public function getUser($id)
     {
         $query = "SELECT * FROM " . user::$table_name . " WHERE id = ?";
