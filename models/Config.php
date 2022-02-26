@@ -17,6 +17,12 @@ class Config
         return self::getRoot() . 'uploads/product_images/';
     }
 
+
+     public static function getSliderRoot()
+    {
+        return self::getRoot() . 'uploads/sliders/';
+    }
+
     public static function getMediaUserRoot()
     {
         return self::getRoot() . 'uploads/user_images/';

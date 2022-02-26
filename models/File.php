@@ -15,9 +15,20 @@ class File{
 
     }
 
+   public static function uploadSliderImage($tmp_image, $image)
+    {
+        return move_uploaded_file($tmp_image, Config::getSliderRoot() . $image);
+
+    }
+
     public static function deleteProductImage($name)
     {
         self::delete(Config::getMediaProductRoot() . $name);
+    }
+
+     public static function deleteSliderImage($name)
+    {
+        self::delete(Config::getSliderRoot() . $name);
     }
 
 }

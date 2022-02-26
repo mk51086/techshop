@@ -55,7 +55,7 @@ class Slider{
 
     public function delSlideId($id)
     {
-        $product = $this->getSlider($id);
+        $slider = $this->getSlider($id);
         $query = "DELETE FROM " . Slider::$table_name . " WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
@@ -69,13 +69,33 @@ class Slider{
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         $stmt->execute();
-        $product = null;
+        $slider = null;
         while ($row = $stmt->fetch()) {
-            $product = $this->createSlider($row);
+            $slider = $this->createSlider($row);
         }
-        return $product;
+        return $slider;
     }
 
+    public function delSlidersById($id)
+     {
+         $slider = $this->getSlider($id);
+         File::deleteSliderImage($slider->img);
+         $query = "DELETE FROM " . Slider::$table_name . " WHERE id = ?";
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $id, PDO::PARAM_INT);
+         return $stmt->execute();
+     }
 
+    public function sliderUpdate($link,$unique_img,$id)
+    {
+        $slider = $this->getSlider($id);
+        $query = "UPDATE " . Slider::$table_name . " SET img = ?, link = ? WHERE id = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $unique_img, PDO::PARAM_STR);
+        $stmt->bindParam(2, $link  , PDO::PARAM_STR);
+        $stmt->bindParam(3, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $slider;
+    }
 
 }
