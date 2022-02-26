@@ -30,21 +30,21 @@ $recommended = $pd->getRecommended($_GET['id']);
             <div class="row">
                 <div class="col-2">
 
-                    <div class="prodimg-div" id="prodarea"><img src="images/products/<?=$product->id?>-1.jpg"
+                    <div class="prodimg-div" id="prodarea"><img src="uploads/product_images/<?= $product->image ?>"
                             id="ProductImg" alt="<?=$product->name?>" /></div>
 
                     <div class="small-img-row">
                         <div class="small-img-col">
-                            <img src="images/products/<?=$product->id?>-1.jpg"
-                                class="small-img selected-prodImg" alt="<?=$product->name?>" />
+                            <img src="uploads/product_images/<?= $product->image ?>"
+                                class="small-img selected-prodImg" alt="<?=$product->name?>-1" />
                         </div>
                         <div class="small-img-col">
                             <img src="images/products/<?=$product->id?>-2.jpg" class="small-img"
-                                alt="<?=$product->name?>">
+                                alt="<?=$product->name?>-2">
                         </div>
                         <div class="small-img-col">
                             <img src="images/products/<?=$product->id?>-3.jpg" class="small-img"
-                                alt="<?=$product->name?>">
+                                alt="<?=$product->name?>-3">
                         </div>
 
                     </div>
@@ -78,7 +78,7 @@ $recommended = $pd->getRecommended($_GET['id']);
 
                 <div class="col-4">
                     <a href="product.php?id=<?=$r->id?>" class="product-link">
-                        <img src="images/products/<?=$r->id?>-1.jpg" alt="<?=$r->name?>" />
+                        <img src="uploads/product_images/<?= $r->image ?>" alt="<?=$r->name?>" />
                         <h4><?=$r->name?></h4>
                     </a>
                     <p><?=$r->price?>€</p>

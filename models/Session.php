@@ -7,13 +7,13 @@ class Session
     public static function setUserIfLogged($user)
     {
         $_SESSION['email'] = $user;
-        $_SESSION['role'] = 0;
+        $_SESSION['role'] = false;
     }
 
     public static function setUserAdmin($user)
     {
         $_SESSION['email'] = $user;
-        $_SESSION['role'] = 1;
+        $_SESSION['role'] = true;
     }
 
     public static function start()

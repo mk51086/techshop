@@ -19,18 +19,24 @@ include 'init.php';
     ?>
     <div class="main">
         <div class="slide-container">
+            <?php
+            $slider = new Slider();
+            $sliders = $slider->getAllSliders();
+            foreach ($sliders as $s) : ?>
             <div class="slide fade">
-                <a href="product.php" class="product-link"><img src="images/1.jpg" alt=""></a>
+                <a href="<?=$s->link?>" class="product-link"><img src="uploads/sliders/<?=$s->image?>" alt=""></a>
             </div>
-            <div class="slide fade">
-                <img src="images/2.jpg" alt="">
-            </div>
-            <div class="slide fade">
-                <img src="images/3.jpg" alt="">
-            </div>
-            <div class="slide fade">
-                <img src="images/4.jpg" alt="">
-            </div>
+
+            <?php endforeach?>
+<!--            <div class="slide fade">-->
+<!--                <img src="images/2.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide fade">-->
+<!--                <img src="images/3.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="slide fade">-->
+<!--                <img src="images/4.jpg" alt="">-->
+<!--            </div>-->
             <a href="#" class="prev"><i class="las la-angle-left la-2x" aria-hidden="true"></i></a>
             <a href="#" class="next"><i class="las la-angle-right la-2x" aria-hidden="true"></i></a>
         </div>

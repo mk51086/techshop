@@ -1,6 +1,6 @@
 <?php
 include_once("../init.php");
-if ($_SESSION['role'] == 0) {
+if (!$_SESSION['role']) {
     echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';
@@ -28,6 +28,7 @@ if ($_SESSION['role'] == 0) {
         $res = File::uploadProductImage($image_tmp, $unique_img);
         if (!$res) {
             echo 'error';
+            $unique_img=$product->image;
         } else {
             File::deleteProductImage($product->image);
             echo 'sukses';

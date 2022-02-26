@@ -1,6 +1,6 @@
 <?php
 include '../init.php';
-if ($_SESSION['role']==0) {
+if (!$_SESSION['role']) {
 echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';}else{

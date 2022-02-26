@@ -25,7 +25,7 @@ class User
     {
         $query = "SELECT * FROM " . User::$table_name . " where email = ?";
         $stmt = $this->db->conn->prepare($query);
-        $stmt->bindParam(1, $email, PDO::PARAM_INT);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }

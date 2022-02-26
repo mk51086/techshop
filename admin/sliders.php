@@ -1,19 +1,34 @@
 <?php
-include_once('../init.php');
+include '../init.php';
 if (!$_SESSION['role']) {
     echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';}else{
-$product = new Product();
-$user = new User();
-$db = Database::instance();
-$num_users = $user->getTotalNumofUsers();
-$num_products = $product->totalRows();
-$total_msg = $db->totalMessages();
+    $s=new Slider();
 
-?>
-<!DOCTYPE html>
-<html>
+    $num_of_sliders = 8;
+
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+
+    $v1 = ($current_page - 1) * $num_of_sliders;
+
+    $sliders = $s->getSlidersPage($v1, $num_of_sliders);
+    $total_sliders = $s->totalRows();
+
+    $total_pages = ceil($total_sliders / $num_of_sliders);
+
+    if (isset($_GET['del'])) {
+        $id = $_GET['del'];
+        $delPro = $s->delSlideId($id);
+        header('Location: sliders.php');
+    }
+
+    ?>
+
+
+
+    <!DOCTYPE html>
+    <html>
 
 <head>
     <meta charset="utf-8">
@@ -23,7 +38,7 @@ $total_msg = $db->totalMessages();
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <title>TECHSHOP - Dashboard</title>
+    <title>TECHSHOP - Produktet</title>
 </head>
 
 <body>
@@ -36,7 +51,7 @@ $total_msg = $db->totalMessages();
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -62,6 +77,13 @@ $total_msg = $db->totalMessages();
 
                     <span class="icon"><i class="fa fa-shopping-cart"></i></span>
                     <span class="title">Produktet</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="products.php">
+
+                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                    <span class="title">Sliders</span>
                 </a>
             </li>
             <li>
@@ -93,91 +115,57 @@ $total_msg = $db->totalMessages();
             </div>
         </div>
 
-        <div class="cardbox">
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $num_products ?></div>
-                    <div class="cardName">Produkte</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-shopping-cart" area-hidden="true"></i>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $total_msg ?></div>
-                    <div class="cardName">Mesazhe</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-comment" area-hidden="true"></i>
-                </div>
-            </div>
-
-            <div class="card">
-                <div>
-                    <div class="numbers"><?= $num_users ?></div>
-                    <div class="cardName">Perdorues</div>
-                </div>
-                <div class="iconBox">
-                    <i class="fa fa-users" area-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-
         <div class="details">
             <div class="recentProducts">
                 <div class="cardHeader">
-                    <h2>Produktet e fundit</h2>
-                    <a href="/products.php" class="btn">Te gjitha</a>
+                    <h2>Sliders</h2>
+
+                    <a href="add-slider.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Shto</a>
                 </div>
                 <table>
                     <thead>
                     <tr>
-                        <td>ID</td>
-                        <td>Emri</td>
-                        <td>Cmimi</td>
-                        <td>Data</td>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Link</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $products = $product->getNumProducts(10);
 
-                    foreach ($products as $product) : ?>
+                    foreach ($sliders as $slider) : ?>
                         <tr>
-                            <td><?= $product->id ?></td>
-                            <td><?= $product->name ?></td>
-                            <td><?= $product->price ?>€</td>
-                            <td><?= $product->data ?></td>
+                            <td><?= $slider->id ?></td>
+                            <td><?= $slider->image ?></td>
+                            <td><?= $slider->link ?></td>
+                            <td>
+                                <a href="edit-slider.php?id=<?= $slider->id ?>">Edit</a>
+                                <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $slider->id ?>">Delete</a>
+                            </td>
                         </tr>
                     <?php endforeach ?>
 
                     </tbody>
                 </table>
-
             </div>
-            <div class="recentCustomers">
-                <div class="cardHeader">
-                    <h2>Klientet e fundit</h2>
-                </div>
-                <table class="customerstbl">
-                    <tbody>
-                    <?php $users = $user->recentUsers(10);
-                    foreach ($users
 
-                    as $user) : ?>
-                    <tr >
-                        <!-- <td width="60px">
-                            <div class="imgBx"><img src="img/1.jpg"></div>
-                        </td> -->
-                        <td><h4><?= $user->emri ?><br/><span><?= $user->data ?></span></h4></td>
-                    </tr>
-                    <tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        <div class="page-btn">
+            <?php if ($current_page > 1) : ?>
+                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $current_page) {
+                    echo "<a class='active'>" . $current_page . "</a>";
+                } else {
+                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
+                }
+            }
+            ?>
+            <?php if ($total_sliders > ($current_page * $num_of_sliders) - $num_of_sliders + count($sliders)) : ?>
+                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -186,4 +174,4 @@ $total_msg = $db->totalMessages();
 <script src="js/script.js"></script>
 </body>
 
-</html><?php }?>
+    </html><?php }?>
