@@ -131,7 +131,20 @@
          return $stmt->execute();
      }
 
-
+     public function productUpdate($name, $desc,$price,$quantity,$unique_img,$id)
+     {
+         $product = $this->getProduct($id);
+         $query = "UPDATE " . Product::$table_name . " SET Name = ?, Price = ?, Description = ?, quantity = ?, image = ? WHERE ProductID = ?";
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $name  , PDO::PARAM_STR);
+         $stmt->bindParam(2, $price   , PDO::PARAM_INT);
+         $stmt->bindParam(3, $desc  , PDO::PARAM_STR);
+         $stmt->bindParam(4, $quantity, PDO::PARAM_INT);
+         $stmt->bindParam(5, $unique_img, PDO::PARAM_STR);
+         $stmt->bindParam(6, $id, PDO::PARAM_INT);
+         $stmt->execute();
+         return $product;
+     }
 
 
  }
