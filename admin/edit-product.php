@@ -12,7 +12,9 @@ if (!$_SESSION['role']) {
     $cmimi = '';
     $sasia = '';
     $file = '';
-
+    $u = new User();
+    $user = $u->getUserbyEmail($_SESSION['email']);
+    $userID = '';
     if(isset($_POST['submit'])){
         $id = $_GET['id'];
         $name = $_POST['name'];
@@ -33,7 +35,7 @@ if (!$_SESSION['role']) {
             File::deleteProductImage($product->image);
             echo 'sukses';
         }
-        $product = $pd->productUpdate($name, $desc, $price, $quantity, $unique_img, $id);
+        $product = $pd->productUpdate($name, $desc, $price, $quantity, $unique_img,$userID, $id);
         header("Location: edit-product.php?id=$id");
     }
 

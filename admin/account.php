@@ -20,12 +20,11 @@ if ($_SESSION['role'] == 0) {
         $surname = $_POST['surname'];
         $email  = $_POST['email'];
         $pass = $_POST['pass'];
-
-
-
+        if($pass == null){
+            $pass = $u->pass;
+        }
         $u->userUpdate($name, $surname,$pass,$email,$id);
         header("Location: account.php");
-        var_dump($user);
     }
 
     ?>
@@ -116,7 +115,7 @@ if ($_SESSION['role'] == 0) {
                 <form action="#" method="post" enctype="multipart/form-data">
 
                     <div class="cardHeader">
-                        <h2>Ndrysho userin</h2>
+                        <h2>Perditeso llogarine</h2>
                     </div>
 
                     <div>

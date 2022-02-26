@@ -10,7 +10,9 @@ if (!$_SESSION['role']) {
     $cmimi = '';
     $sasia = '';
     $file = '';
-    
+    $u = new User();
+    $user = $u->getUserbyEmail($_SESSION['email']);
+    $userID = $user->id;
     if(isset($_POST['shtoProdukt'])){
         $emri = $_POST['emri'];
         $desc = $_POST['desc'];
@@ -28,7 +30,7 @@ if (!$_SESSION['role']) {
         } else {
             echo 'sukses';
         }
-        $p->addProduct($emri, $desc, $cmimi, $sasia,$unique_img);
+        $p->addProduct($emri, $desc, $cmimi, $sasia,$userID,$unique_img);
     }
     
 ?>

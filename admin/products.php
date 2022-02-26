@@ -5,7 +5,8 @@ echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';}else{
 $pd=new Product();
-
+$u = new User();
+$autor = $u->getUser($pd->userID);
 $num_products_on_each_page = 8;
 
 $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
@@ -129,18 +130,24 @@ if (isset($_GET['delpro'])) {
                         <th>Emri</th>
                         <th>Cmimi</th>
                         <th>Data</th>
+                        <th>Autor</th>
                         <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
 
-                    foreach ($products as $product) : ?>
+
+                    foreach ($products as $product) :
+                        $autor = $u->getUser($product->userID);
+                        ?>
+
                         <tr>
                             <td><?= $product->id ?></td>
                             <td><?= $product->name ?></td>
                             <td><?= $product->price ?>€</td>
                             <td><?= $product->data ?></td>
+                            <td><?= $autor->emri ?></td>
                             <td>
                                 <a href="edit-product.php?id=<?= $product->id ?>">Edit</a>
                                 <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $product->id ?>">Delete</a>

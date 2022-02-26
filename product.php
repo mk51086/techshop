@@ -5,6 +5,8 @@ $pd=new Product();
 $product = $pd->getProduct($_GET['id']);
 
 $recommended = $pd->getRecommended($_GET['id']);
+$u = new User();
+$user = $u->getUser($product->userID);
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +52,7 @@ $recommended = $pd->getRecommended($_GET['id']);
                     </div>
                 </div>
                 <div class="col-2">
-                    <h2><?=$product->name?></h2>
+                    <h5>Autor: <?=$user->emri?></h5>
                     <h4><?=$product->price?>€</h4>
 
                     <label for="sasia" id="lblsasia">Sasia: </label><input id="input-sasia" type="number" value="1"
