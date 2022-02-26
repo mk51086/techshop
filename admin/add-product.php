@@ -1,5 +1,9 @@
 <?php
 include_once '../init.php';
+if ($_SESSION['role']==0) {
+    echo '<script>alert("Nuk keni qasje ne kete faqe");
+            location.href = "../index.php";
+</script>';}else{
     $p= new Product();
     $emri = '';
     $desc = '';
@@ -115,7 +119,7 @@ include_once '../init.php';
                         <div class="cardHeader">
                             <h2>Shto produkt te ri</h2>
 
-                            <a href="products.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Te gjitha produktet</a>
+                            <a href="products.php" class="btn"><span class="icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span> Te gjitha produktet</a>
                         </div>
 
                         <div>
@@ -165,4 +169,4 @@ include_once '../init.php';
         <script src="js/script.js"></script>
 </body>
 
-</html>
+</html><?php }?>

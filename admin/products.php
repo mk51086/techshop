@@ -1,5 +1,9 @@
 <?php
 include '../init.php';
+if ($_SESSION['role']==0) {
+echo '<script>alert("Nuk keni qasje ne kete faqe");
+            location.href = "../index.php";
+</script>';}else{
 $pd=new Product();
 
 $num_products_on_each_page = 8;
@@ -18,6 +22,7 @@ if (isset($_GET['delpro'])) {
     $delPro = $pd->delProById($id);
     header('Location: products.php');
 }
+
 ?>
 
 
@@ -164,4 +169,4 @@ if (isset($_GET['delpro'])) {
 <script src="js/script.js"></script>
 </body>
 
-</html>
+</html><?php }?>

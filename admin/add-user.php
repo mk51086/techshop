@@ -1,5 +1,9 @@
 <?php
 include_once '../init.php';
+if ($_SESSION['role']==0) {
+    echo '<script>alert("Nuk keni qasje ne kete faqe");
+            location.href = "../index.php";
+</script>';}else{
     $u = new User();
     $emri = '';
     $mbiemri = '';
@@ -164,4 +168,4 @@ include_once '../init.php';
         <script src="js/script.js"></script>
 </body>
 
-</html>
+</html><?php }?>

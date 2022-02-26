@@ -6,12 +6,9 @@ $u = new User();
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    if ($u->loginUser($email, $password)) {
-         header("refresh:3;url=index.php");
-    }
-	$error = $u->getNotification(Notification::$loginError);
-	$sukses = $u->getNotification(Notification::$loginSuccess);
+    $u->loginUser($email,$password);
+    $error = $u->getNotification(Notification::$loginError);
+    $sukses = $u->getNotification(Notification::$loginSuccess);
 }
 
 ?>
@@ -27,53 +24,53 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <?php
-    include("header.php");
-    ?>
-    <div class="main">
+<?php
+include("header.php");
+?>
+<div class="main">
 
-        <div class="wrapper">
-            <div class="title">
-                Kyçu
-            </div>
-            <form id="login" class="form" method="POST">
-                <div class="inputfield">
-                    <label for="email">Email Adresa</label>
-  				<input type="text" class="input" id="email" name="email" value="" ><br>                   
-			  <?php 
-					if(isset($error)){ ?>
-                    <small><?=$error?></small>
-<?php } ?>
-                </div>
-                <div class="inputfield">
-                    <label for="password">Fjalëkalimi</label>
-                    <input type="password" class="input" id="password" name="password" value="" ><br>
-                        <?php 
-					if(isset($error)){ ?>
-                    <small><?=$error?></small>
-<?php } ?>
-                </div>
-
-                <div class="inputfield">
-                    <input type="submit" value="Kyçu" id="submit" name="login" class="btn">
-                    <small style="padding-left:25%;"></small>
-                </div>
-                <p>Nuk Keni llogari?
-                    <a class="form-bottom-link" href="register.php">Regjistrohu</a>
-                </p>
-                <div class="success-div">
-	<?php 
-					if(isset($sukses)){ ?>
-                    <span class="success" style="color: green;"><?=$sukses?></span>
-<?php } ?>
-                </div>
-            </form>
+    <div class="wrapper">
+        <div class="title">
+            Kyçu
         </div>
+        <form id="login" class="form" method="POST">
+            <div class="inputfield">
+                <label for="email">Email Adresa</label>
+                <input type="text" class="input" id="email" name="email" value="" ><br>
+                <?php
+                if(isset($error)){ ?>
+                    <small><?=$error?></small>
+                <?php } ?>
+            </div>
+            <div class="inputfield">
+                <label for="password">Fjalëkalimi</label>
+                <input type="password" class="input" id="password" name="password" value="" ><br>
+                <?php
+                if(isset($error)){ ?>
+                    <small><?=$error?></small>
+                <?php } ?>
+            </div>
+
+            <div class="inputfield">
+                <input type="submit" value="Kyçu" id="submit" name="login" class="btn">
+                <small style="padding-left:25%;"></small>
+            </div>
+            <p>Nuk Keni llogari?
+                <a class="form-bottom-link" href="register.php">Regjistrohu</a>
+            </p>
+            <div class="success-div">
+                <?php
+                if(isset($sukses)){ ?>
+                    <span class="success" style="color: green;"><?=$sukses?></span>
+                <?php } ?>
+            </div>
+        </form>
     </div>
-    <?php
-    include("footer.php");
-    ?>
-  <script src="js/menu.js"></script>
+</div>
+<?php
+include("footer.php");
+?>
+<script src="js/menu.js"></script>
 </body>
 
 </html>

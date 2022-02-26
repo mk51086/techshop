@@ -4,9 +4,16 @@
 class Session
 {
 
- public static function setUserIfLogged($user)
+    public static function setUserIfLogged($user)
     {
         $_SESSION['email'] = $user;
+        $_SESSION['role'] = 0;
+    }
+
+    public static function setUserAdmin($user)
+    {
+        $_SESSION['email'] = $user;
+        $_SESSION['role'] = 1;
     }
 
     public static function start()
@@ -20,7 +27,6 @@ class Session
         session_destroy();
     }
 
- 
 
 }
 

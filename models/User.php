@@ -10,9 +10,10 @@ class User
     public $pass;
     public $email;
     public $mbiemri;
-	public $gjinia;
-	public $data;
-	public $img;
+    public $gjinia;
+    public $data;
+    public $img;
+    public $role;
     private static $notifications = [];
 
     public function __construct()
@@ -58,15 +59,35 @@ class User
 
     public function loginUser($email, $password)
     {
-
+        $query = "SELECT * FROM " . User::$table_name . " WHERE email = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->execute();
         $user = $this->getUserbyEmail($email);
+        $u = null;
+        while ($row = $stmt->fetch()) {
+            $u = new User();
+            $u->id = $row['id'];
+            $u->email = $row['email'];
+            $u->pass = $row['password'];
+            $u->emri = $row['emri'];
+            $u->mbiemri = $row['mbiemri'];
+            $u->role = $row['role'];
+
+        }
         if ($user == null) {
             self::$notifications[] = Notification::$loginError;
             return false;
         }
         if (password_verify($password, $user->pass)) {
             self::$notifications[] = Notification::$loginSuccess;
-            Session::setUserIfLogged($email);
+            if ($u->role == 1) {
+                Session::setUserAdmin($email);
+                header("refresh:1;url=admin");
+            } else if ($u->role == 0) {
+                Session::setUserIfLogged($email);
+                header("refresh:3;url=index.php");
+            }
             return true;
         } else {
             self::$notifications[] = Notification::$loginError;
@@ -79,26 +100,26 @@ class User
         Session::end();
     }
 
-    public function register($emri, $mbiemri, $email, $password, $passwordConfirm,$gjinia,$kushtet)
+    public function register($emri, $mbiemri, $email, $password, $passwordConfirm, $gjinia, $kushtet)
     {
         self::validateEmail($email);
         self::validateName($emri);
         self::validateLastname($mbiemri);
         self::validatePassword($password, $passwordConfirm);
-		self::validateGjinia($gjinia);
-		self::validateKushtet($kushtet);
+        self::validateGjinia($gjinia);
+        self::validateKushtet($kushtet);
         if (empty(self::$notifications) == true) {
-			self::$notifications[] = Notification::$registrationSuccess;
-            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
+            self::$notifications[] = Notification::$registrationSuccess;
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email, $gjinia);
         } else
             return false;
     }
 
-    public function newUser($emri, $mbiemri, $email, $password,$gjinia)
+    public function newUser($emri, $mbiemri, $email, $password, $gjinia)
     {
         if (empty(self::$notifications) == true) {
             self::$notifications[] = Notification::$registrationSuccess;
-            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email,$gjinia);
+            $this->db->addUser($emri, $mbiemri, self::passwordHash($password), $email, $gjinia);
         } else
             return false;
     }
@@ -170,7 +191,7 @@ class User
             return;
         }
 
-        if (strlen($msg) <10 || strlen($msg)>250) {
+        if (strlen($msg) < 10 || strlen($msg) > 250) {
             array_push(self::$notifications, Notification::$msgSize);
             return;
         }
@@ -210,7 +231,7 @@ class User
         return password_hash($password, PASSWORD_BCRYPT, ['cost' > 12]);
     }
 
-private function validateEmailMsg($email)
+    private function validateEmailMsg($email)
     {
         if (empty($email)) {
             array_push(self::$notifications, Notification::$emailZbrazetmsg);
@@ -226,8 +247,8 @@ private function validateEmailMsg($email)
 
     public function contact($email, $emri, $tel, $msg)
     {
-        
-		self::validateEmailMsg($email);
+
+        self::validateEmailMsg($email);
         self::validateName($emri);
         self::validateTel($tel);
         self::validateMsg($msg);
@@ -237,17 +258,18 @@ private function validateEmailMsg($email)
             return false;
     }
 
-	public function getTotalNumofUsers(){
-	  $query = "SELECT COUNT(*) FROM " . User::$table_name;
+    public function getTotalNumofUsers()
+    {
+        $query = "SELECT COUNT(*) FROM " . User::$table_name;
         $stmt = $this->db->conn->prepare($query);
         $stmt->execute();
-		$num = $stmt->fetchColumn(); 
-		return $num;
-	}
+        $num = $stmt->fetchColumn();
+        return $num;
+    }
 
-		 public function getNumofUsers($n)
+    public function getNumofUsers($n)
     {
-        $query = "SELECT * FROM " . User::$table_name . " LIMIT ".$n;
+        $query = "SELECT * FROM " . User::$table_name . " LIMIT " . $n;
         $stmt = $this->db->conn->query($query);
         $users = [];
         while ($row = $stmt->fetch()) {
@@ -257,8 +279,9 @@ private function validateEmailMsg($email)
         return $users;
     }
 
-    public function recentUsers($n){
-        $query = "SELECT * FROM " . User::$table_name . " ORDER BY data DESC LIMIT ".$n;
+    public function recentUsers($n)
+    {
+        $query = "SELECT * FROM " . User::$table_name . " ORDER BY data DESC LIMIT " . $n;
         $stmt = $this->db->conn->query($query);
         $users = [];
         while ($row = $stmt->fetch()) {
@@ -269,19 +292,20 @@ private function validateEmailMsg($email)
     }
 
 
-public function createUser($row){
+    public function createUser($row)
+    {
 
-         $user = new User();
-         $user->id = $row['id'];
-         $user->email = $row['email'];
-         $user->pass = $row['password'];
-         $user->emri = $row['emri'];
-         $user->mbiemri = $row['mbiemri'];
-         $user->gjinia = $row['gjinia'];
-         return $user;
-     }
+        $user = new User();
+        $user->id = $row['id'];
+        $user->email = $row['email'];
+        $user->pass = $row['password'];
+        $user->emri = $row['emri'];
+        $user->mbiemri = $row['mbiemri'];
+        $user->gjinia = $row['gjinia'];
+        return $user;
+    }
 
- private static function validateGjinia($gjinia)
+    private static function validateGjinia($gjinia)
     {
         if (empty($gjinia)) {
             array_push(self::$notifications, Notification::$gjiniaIsempty);
@@ -289,8 +313,9 @@ public function createUser($row){
         }
     }
 
-    private static function validateKushtet($kushtet){
-        if ($kushtet==0) {
+    private static function validateKushtet($kushtet)
+    {
+        if ($kushtet == 0) {
             array_push(self::$notifications, Notification::$kushtetPerdorimit);
             return;
         }

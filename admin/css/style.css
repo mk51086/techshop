@@ -277,14 +277,11 @@ input {
 
 .details .recentProducts table tr {
     border-bottom: 1px solid #8d99ae;
-    border-left: solid 1px #8d99ae;
-    border-right: solid 1px #8d99ae;
+
 }
 
 .details .recentProducts table td {
     border-bottom: 1px solid #8d99ae;
-    border-left: solid 1px #8d99ae;
-    border-right: solid 1px #8d99ae;
     text-align: center;
 }
 

@@ -1,11 +1,16 @@
 <?php
 include_once('../init.php');
+if ($_SESSION['role']==0) {
+    echo '<script>alert("Nuk keni qasje ne kete faqe");
+            location.href = "../index.php";
+</script>';}else{
 $product = new Product();
 $user = new User();
 $db = Database::instance();
 $num_users = $user->getTotalNumofUsers();
 $num_products = $product->totalRows();
 $total_msg = $db->totalMessages();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -181,4 +186,4 @@ $total_msg = $db->totalMessages();
 <script src="js/script.js"></script>
 </body>
 
-</html>
+</html><?php }?>
