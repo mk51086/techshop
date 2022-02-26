@@ -34,6 +34,7 @@ if (!$_SESSION['role']) {
             echo 'sukses';
         }
         $product = $pd->productUpdate($name, $desc, $price, $quantity, $unique_img, $id);
+        header("Location: edit-product.php?id=$id");
     }
 
     ?>

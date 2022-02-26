@@ -24,6 +24,7 @@ if ($_SESSION['role'] == 0) {
    
       
         $user = $pd->userUpdate($emri, $mbiemri, $email, $pass, $id);
+  		header("Location: edit-user.php?id=$id");
     }
 
     ?>
