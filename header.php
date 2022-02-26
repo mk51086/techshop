@@ -10,7 +10,7 @@
                     <ul id="MenuItems">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="products.php">Produktet</a></li>
-                        <li><a href="about-us.php">Rreth nesh</a></li>
+                        <li><a href="about.php">Rreth nesh</a></li>
                         <li><a href="contact-us.php">Kontakti</a></li>
 						  <?php
                     if (isset($_SESSION['email'])) {

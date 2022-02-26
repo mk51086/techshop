@@ -49,4 +49,17 @@ class Page{
             return $text;
         }
     }
+
+    public function getPage($id)
+    {
+        $query = "SELECT * FROM " . Page::$table_name . " WHERE id = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $product = null;
+        while ($row = $stmt->fetch()) {
+            $product = $this->createPage($row);
+        }
+        return $product;
+    }
 }
