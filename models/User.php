@@ -193,7 +193,6 @@ class User
 
         if (strlen($msg) < 10 || strlen($msg) > 250) {
             array_push(self::$notifications, Notification::$msgSize);
-            return;
         }
     }
 
@@ -222,7 +221,6 @@ class User
 
         if (!preg_match("#[A-Z]+#", $password)) {
             array_push(self::$notifications, Notification::$passwordPaShkronja);
-            return;
         }
     }
 
@@ -240,7 +238,6 @@ class User
 
         if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
             array_push(self::$notifications, Notification::$emailJoValide);
-            return;
         }
     }
 
@@ -309,7 +306,6 @@ class User
     {
         if (empty($gjinia)) {
             array_push(self::$notifications, Notification::$gjiniaIsempty);
-            return;
         }
     }
 
@@ -317,7 +313,6 @@ class User
     {
         if ($kushtet == 0) {
             array_push(self::$notifications, Notification::$kushtetPerdorimit);
-            return;
         }
     }
 }

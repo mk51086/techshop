@@ -46,7 +46,7 @@ include 'init.php';
 
                     <div class="col-4">
                         <a href="product.php?id=<?= $product->id ?>" class="product-link">
-                            <img src="images/products/<?= $product->id ?>-1.jpg" alt="<?= $product->name ?>" />
+                            <img src="uploads/product_images/<?= $product->image ?>" alt="<?= $product->name ?>" />
                             <h4><?= $product->name?></h4>
                         </a>
                         <p><?= $product->price ?>€</p>
