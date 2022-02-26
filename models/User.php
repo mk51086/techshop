@@ -315,4 +315,31 @@ class User
             array_push(self::$notifications, Notification::$kushtetPerdorimit);
         }
     }
+    public function getUser($id)
+    {
+        $query = "SELECT * FROM " . user::$table_name . " WHERE id = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $user = null;
+        while ($row = $stmt->fetch()) {
+           $user = $this->createUser($row);
+        }
+        return $user;
+    }
+    
+    public function userUpdate($emri, $mbiemri,$pass,$email,$id)
+    {
+        $product = $this->getUser($id);
+        $query = "UPDATE " . User::$table_name . " SET emri = ?, mbiemri = ?, password = ?, email = ? WHERE id = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $emri  , PDO::PARAM_STR);
+        $stmt->bindParam(2, $mbiemri , PDO::PARAM_INT);
+        $stmt->bindParam(3, $pass , PDO::PARAM_STR);
+        $stmt->bindParam(4, $email, PDO::PARAM_INT);
+        $stmt->bindParam(5, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $product;
+    }
+
 }
