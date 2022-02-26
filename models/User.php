@@ -343,6 +343,49 @@ class User
         return $user;
     }
 
+    public function deleleteUserById($id)
+    {
+        $user = $this->getUser($id);
+        $query = "DELETE FROM " . user::$table_name . " WHERE id = ?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
+    public function totalRowsU()
+    {
+        $query = "SELECT * FROM " . user::$table_name;
+        $stmt = $this->db->conn->query($query)->rowCount();
+        return $stmt;
+    }
+
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM " . user::$table_name;
+        $stmt = $this->db->conn->query($query);
+        $user = [];
+        while ($row = $stmt->fetch()) {
+            $user = $this->createUser($row);
+            $users[] = $user;
+        }
+        return $users;
+    }
+
+
+
+
+    public function getUsersPage($v1,$v2){
+        $query = "SELECT * FROM " . user::$table_name . " ORDER BY data DESC LIMIT ?,?";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $v1, PDO::PARAM_INT);
+        $stmt->bindParam(2, $v2, PDO::PARAM_INT);
+        $stmt->execute();
+        $users = [];
+        while ($row = $stmt->fetch()) {
+            $user = $this->createUser($row);
+            $users[]=$user;
+        }
+        return $users;
+    }
 
 }
