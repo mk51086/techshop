@@ -6,25 +6,26 @@ if ($_SESSION['role'] == 0) {
 </script>';
 } else {
 
-    $pd= new User();
-    $user = $pd->getUser($_GET['id']);
-    $emri = '';
-    $mbiemri = '';
-    $email = '';
+    $u= new User();
+    $email = $_SESSION['email'];
+    $user = '';
+    $name = '';
+    $surname = '';
     $pass = '';
-
+    $user = $u->getUserbyEmail($email);
 
     if(isset($_POST['submit'])){
-        $id = $_GET['id'];
-        $emri = $_POST['emri'];
-        $mbiemri = $_POST['mbiemri'];
+        $id = $user->id;
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
         $email  = $_POST['email'];
         $pass = $_POST['pass'];
-  
-   
-      
-        $user = $pd->userUpdate($emri, $mbiemri, $pass,$email, $id);
-  		header("Location: edit-user.php?id=$id");
+
+
+
+        $u->userUpdate($name, $surname,$pass,$email,$id);
+        header("Location: account.php");
+        var_dump($user);
     }
 
     ?>
@@ -41,7 +42,7 @@ if ($_SESSION['role'] == 0) {
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <title>TECHSHOP - Dashboard</title>
+    <title>TECHSHOP - Account</title>
 </head>
 
 <body>
@@ -121,13 +122,13 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc" for="Field1">Emri </label>
                         <div>
-                            <input name="emri" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"  tabindex="1">
+                            <input name="name" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"  tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Mbiemri</label>
                         <div>
-                            <input name="mbiemri" type="text" class="field text fn" value="<?= $user->mbiemri ?>" size="8"  tabindex="1">
+                            <input name="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>" size="8"  tabindex="1">
                         </div>
                     </div>
                     <div>
@@ -144,12 +145,12 @@ if ($_SESSION['role'] == 0) {
                     </div>
                     <div>
 
-                    <div>
                         <div>
-                             <input class="addProd" name="submit" type="submit" value="Ndrysho">
-                        </div>
+                            <div>
+                                <input class="addProd" name="submit" type="submit" value="Ndrysho">
+                            </div>
 
-                    </div>
+                        </div>
 
 
                 </form>

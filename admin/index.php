@@ -75,7 +75,7 @@ $total_msg = $db->totalMessages();
                 <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <span class="title">Password</span>
+                    <span class="title">Account</span>
                 </a>
             </li>
             <li>
