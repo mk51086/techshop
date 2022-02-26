@@ -69,6 +69,20 @@ if ($_SESSION['role'] == 0) {
                 </a>
             </li>
             <li>
+                <a href="pages.php">
+
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
+                </a>
+            </li>
+            <li>
+                <a href="sliders.php">
+
+                    <span class="icon"><i class="fa fa-users"></i></span>
+                    <span class="title">Sliders</span>
+                </a>
+            </li>
+            <li>
                 <a href="messages.php">
 
                     <span class="icon"><i class="fa fa-comment"></i></span>

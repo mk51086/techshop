@@ -86,6 +86,13 @@ if (!$_SESSION['role']) {
                     </a>
                 </li>
                 <li>
+                    <a href="users.php">
+
+                        <span class="icon"><i class="fa fa-users"></i></span>
+                        <span class="title">Klientet</span>
+                    </a>
+                </li>
+                <li>
                     <a href="sliders.php">
 
                         <span class="icon"><i class="fa fa-eye"></i></span>

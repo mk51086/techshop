@@ -65,6 +65,13 @@ $total_msg = $db->totalMessages();
                 </a>
             </li>
             <li>
+                <a href="pages.php">
+
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
+                </a>
+            </li>
+            <li>
                 <a href="sliders.php">
 
                     <span class="icon"><i class="fa fa-eye"></i></span>

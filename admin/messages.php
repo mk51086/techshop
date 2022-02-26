@@ -5,7 +5,7 @@ echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
 </script>';}else{
 
-$m=new messages();
+$m=new Message();
 
 $num_of_messages = 8;
 
@@ -21,7 +21,7 @@ $total_messages = ceil($total_messages / $num_of_messages);
 if (isset($_GET['delpro'])) {
     $id = $_GET['delpro'];
     $delPro = $m->deleteMessages($id);
-    header('Location: messages.php');
+    header('Location: Message.php');
 }
 
 ?>
@@ -78,6 +78,13 @@ if (isset($_GET['delpro'])) {
 
                     <span class="icon"><i class="fa fa-shopping-cart"></i></span>
                     <span class="title">Produktet</span>
+                </a>
+            </li>
+            <li>
+                <a href="pages.php">
+
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
                 </a>
             </li>
             <li>
@@ -161,7 +168,7 @@ if (isset($_GET['delpro'])) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='messages.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='Message.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>

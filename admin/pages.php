@@ -1,34 +1,28 @@
 <?php
 include '../init.php';
 if (!$_SESSION['role']) {
-echo '<script>alert("Nuk keni qasje ne kete faqe");
+    echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
-</script>';}else{
-$u=new user();
+</script>';
+} else {
+    $p = new Page();
 
-$num_of_users = 8;
+    $num_of_pages = 8;
 
-$current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
+    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
 
-$v1 = ($current_page - 1) * $num_of_users;
+    $v1 = ($current_page - 1) * $num_of_pages;
 
-$users = $u->getUsersPage($v1, $num_of_users);
-$total_users = $u->totalRowsU();
+    $pages = $p->getPages($v1, $num_of_pages);
+    $total_pages = $p->totalRows();
 
-$total_pages = ceil($total_users / $num_of_users);
+    $total_pages = ceil($total_pages / $num_of_pages);
 
-if (isset($_GET['delpro'])) {
-    $id = $_GET['delpro'];
-    $delPro = $u->deleleteUserById($id);
-    header('Location: Users.php');
-}
-
-?>
+    ?>
 
 
-
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
 <head>
     <meta charset="utf-8">
@@ -38,7 +32,7 @@ if (isset($_GET['delpro'])) {
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <title>TECHSHOP - Produktet</title>
+    <title>TECHSHOP - Faqet</title>
 </head>
 
 <body>
@@ -58,7 +52,7 @@ if (isset($_GET['delpro'])) {
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="users.php">
 
                     <span class="icon"><i class="fa fa-users"></i></span>
@@ -79,6 +73,13 @@ if (isset($_GET['delpro'])) {
                     <span class="title">Produktet</span>
                 </a>
             </li>
+            <li class="active">
+                <a href="pages.php">
+
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
+                </a>
+            </li>
             <li>
                 <a href="sliders.php">
 
@@ -90,7 +91,7 @@ if (isset($_GET['delpro'])) {
                 <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <span class="title">Password</span>
+                    <span class="title">Account</span>
                 </a>
             </li>
             <li>
@@ -118,33 +119,31 @@ if (isset($_GET['delpro'])) {
         <div class="details">
             <div class="recentProducts">
                 <div class="cardHeader">
-                    <h2>Te Gjith Klientet</h2>
+                    <h2>Faqet</h2>
 
-                    <a href="add-user.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Shto</a>
                 </div>
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Emri</th>
-                        <th>Mbiemri</th>
-                        <th>Email</th>
-                        <th>gjinia</th>
+                        <th>Titulli</th>
+                        <th>Permbajtja</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
 
-                    foreach ($users as $user) : ?>
+                    foreach ($pages as $page) :
+                        $page->content = $page->shortDesc($page->content);
+
+                        ?>
                         <tr>
-                            <td><?= $user->id ?></td>
-                            <td><?= $user->emri ?></td>
-                            <td><?= $user->mbiemri ?></td>
-                            <td><?= $user->email ?></td>
-                            <td><?= $user->gjinia ?></td>
+                            <td><?= $page->id ?></td>
+                            <td><?= $page->title ?></td>
+                            <td><?= $page->content ?></td>
                             <td>
-                                <a href="Edit-user.php?id=<?= $user->id ?>">Edit</a>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $user->id ?>">Delete</a>
+                                <a href="edit-page.php?id=<?= $page->id ?>">Edit</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -156,18 +155,18 @@ if (isset($_GET['delpro'])) {
         </div>
         <div class="page-btn">
             <?php if ($current_page > 1) : ?>
-                <a href="users.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
             <?php endif; ?>
             <?php for ($i = 1; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='users.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>
-            <?php if ($total_users > ($current_page * $num_of_users) - $num_of_users + count($users)) : ?>
-                <a href="users.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+            <?php if ($total_pages > ($current_page * $num_of_pages) - $num_of_pages + count($pages)) : ?>
+                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
             <?php endif; ?>
         </div>
     </div>
@@ -177,4 +176,4 @@ if (isset($_GET['delpro'])) {
 <script src="js/script.js"></script>
 </body>
 
-</html><?php }?>
+    </html><?php } ?>

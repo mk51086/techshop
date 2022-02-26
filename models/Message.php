@@ -1,7 +1,7 @@
 <?php
 include_once("Database.php");
 
-class Messages {
+class Message {
     public static $table_name= 'mesazhet';
     private $db;
     public $id;
@@ -16,7 +16,7 @@ class Messages {
 
     public function createMessages($row)
     {
-        $mesazhet = new Messages();
+        $mesazhet = new Message();
         $mesazhet->ID = $row['ID'];
         $mesazhet->emri = $row['emri'];
         $mesazhet->email = $row['email'];
@@ -27,7 +27,7 @@ class Messages {
     }
     public function getMessages($id)
     {
-        $query = "SELECT * FROM " . Messages::$table_name . " WHERE id = ?";
+        $query = "SELECT * FROM " . Message::$table_name . " WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -42,7 +42,7 @@ class Messages {
     public function deleteMessages($id)
     {
         $mesazhet = $this->getMessages($id);
-        $query = "DELETE FROM " . messages::$table_name . " WHERE ID = ?";
+        $query = "DELETE FROM " . Message::$table_name . " WHERE ID = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         return $stmt->execute();
@@ -51,14 +51,14 @@ class Messages {
 
     public function totalRowsM()
     {
-        $query = "SELECT * FROM " . Messages::$table_name;
+        $query = "SELECT * FROM " . Message::$table_name;
         $stmt = $this->db->conn->query($query)->rowCount();
         return $stmt;
     }
 
     public function getAllMessages()
     {
-        $query = "SELECT * FROM " . Messages::$table_name;
+        $query = "SELECT * FROM " . Message::$table_name;
         $stmt = $this->db->conn->query($query);
         $mesazhi = [];
         while ($row = $stmt->fetch()) {
@@ -72,7 +72,7 @@ class Messages {
 
 
     public function getMessagesPage($v1,$v2){
-        $query = "SELECT * FROM " . Messages::$table_name . " ORDER BY emri DESC LIMIT ?,?";
+        $query = "SELECT * FROM " . Message::$table_name . " ORDER BY emri DESC LIMIT ?,?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $v1, PDO::PARAM_INT);
         $stmt->bindParam(2, $v2, PDO::PARAM_INT);
