@@ -330,16 +330,17 @@ class User
     
     public function userUpdate($emri, $mbiemri,$pass,$email,$id)
     {
-        $product = $this->getUser($id);
+        $user = $this->getUser($id);
+        $pass = self::passwordHash($pass);
         $query = "UPDATE " . User::$table_name . " SET emri = ?, mbiemri = ?, password = ?, email = ? WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $emri  , PDO::PARAM_STR);
-        $stmt->bindParam(2, $mbiemri , PDO::PARAM_INT);
+        $stmt->bindParam(2, $mbiemri , PDO::PARAM_STR);
         $stmt->bindParam(3, $pass , PDO::PARAM_STR);
-        $stmt->bindParam(4, $email, PDO::PARAM_INT);
+        $stmt->bindParam(4, $email, PDO::PARAM_STR);
         $stmt->bindParam(5, $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $product;
+        return $user;
     }
 
 }

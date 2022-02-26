@@ -23,7 +23,7 @@ if ($_SESSION['role'] == 0) {
   
    
       
-        $user = $pd->userUpdate($emri, $mbiemri, $email, $pass, $id);
+        $user = $pd->userUpdate($emri, $mbiemri, $pass,$email, $id);
   		header("Location: edit-user.php?id=$id");
     }
 
@@ -139,7 +139,7 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc">Ndrysho Passwordin</label>
                         <div>
-                            <input name="pass" type="text" class="field text fn" value="<?= $user->pass ?>"   size="8" tabindex="1">
+                            <input name="pass" type="text" class="field text fn" value=""   size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
