@@ -191,7 +191,7 @@ class User
             return;
         }
 
-        if (strlen($msg) < 10 || strlen($msg) > 250) {
+        if (strlen($msg) < 10 || strlen($msg) > 400) {
             array_push(self::$notifications, Notification::$msgSize);
         }
     }
@@ -331,7 +331,7 @@ class User
         return $user;
     }
     
-    public function userUpdate($emri, $mbiemri,$pass,$email,$id)
+    public function userUpdate($emri, $mbiemri, $pass,$email,$roli, $id)
     {
         $user = $this->getUser($id);
         if(empty($pass)){
@@ -339,13 +339,14 @@ class User
         }else {
             $pass = self::passwordHash($pass);
         }
-        $query = "UPDATE " . User::$table_name . " SET emri = ?, mbiemri = ?, password = ?, email = ? WHERE id = ?";
+        $query = "UPDATE " . User::$table_name . " SET emri = ?, mbiemri = ?, password = ?, email = ?, role = ?  WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $emri  , PDO::PARAM_STR);
         $stmt->bindParam(2, $mbiemri , PDO::PARAM_STR);
         $stmt->bindParam(3, $pass , PDO::PARAM_STR);
         $stmt->bindParam(4, $email, PDO::PARAM_STR);
-        $stmt->bindParam(5, $id, PDO::PARAM_INT);
+         $stmt->bindParam(5, $roli, PDO::PARAM_INT);
+        $stmt->bindParam(6, $id, PDO::PARAM_INT);
         $stmt->execute();
         return $user;
     }

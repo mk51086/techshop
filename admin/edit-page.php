@@ -19,7 +19,7 @@ if ($_SESSION['role'] == 0) {
          
       
         $pages = $p->pageUpdate($title, $content,$id);
-  		header("Location: edit-page.php?id=$id");
+  		header("Location: pages.php");
     }
 
     ?>

@@ -65,9 +65,6 @@
      }
 
 
-
-
-
      public function getProductsPage($v1,$v2){
          $query = "SELECT * FROM " . Product::$table_name . " ORDER BY data DESC LIMIT ?,?";
          $stmt = $this->db->conn->prepare($query);

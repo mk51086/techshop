@@ -18,6 +18,7 @@ if (!$_SESSION['role']) {
         $email = $_POST['email'];
 		$gjinia = $_POST['gjinia'];
         $u->newUser($emri, $mbiemri, $email, $password,$gjinia);
+  header("Location: users.php");
     }
     
 ?>

@@ -30,7 +30,7 @@ if (!$_SESSION['role']) {
             echo 'sukses';
         }
         $slider = $s->sliderUpdate($link, $unique_img,$id);
-        header("Location: edit-slider.php?id=$id");
+        header("Location: sliders.php");
     }
 
     ?>

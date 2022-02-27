@@ -13,7 +13,8 @@ if ($_SESSION['role'] == 0) {
     $surname = '';
     $pass = '';
     $user = $u->getUserbyEmail($email);
-
+    $role = $user->role;
+    
     if (isset($_POST['acc'])) {
         $id = $user->id;
         $name = $_POST['name'];
@@ -21,7 +22,8 @@ if ($_SESSION['role'] == 0) {
         $email = $_POST['email'];
         $pass = $_POST['pass'];
 
-        $u->userUpdate($name, $surname, $pass, $email, $id);
+        $u->userUpdate($name, $surname, $pass, $email,$role, $id);
+          header('Location: account.php');
     }
 
     if (isset($_GET['delacc'])) {
@@ -153,7 +155,7 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc" for="Field1">Mbiemri</label>
                         <div>
-                            <input required ="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>"
+                            <input required name="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>"
                                    size="8" tabindex="1">
                         </div>
                     </div>
@@ -167,7 +169,7 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc">Ndrysho Passwordin</label>
                         <div>
-                            <input minlength="8" maxlength="25"  required name="pass" type="text" class="field text fn" value="" size="8" tabindex="1">
+                            <input name="pass" type="text" class="field text fn" value="" size="8" tabindex="1">
                         </div>
                     </div>
                     <div>

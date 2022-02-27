@@ -12,7 +12,7 @@ if ($_SESSION['role'] == 0) {
     $mbiemri = '';
     $email = '';
     $pass = '';
-
+    $roli = '';
 
     if(isset($_POST['submit'])){
         $id = $_GET['id'];
@@ -20,11 +20,11 @@ if ($_SESSION['role'] == 0) {
         $mbiemri = $_POST['mbiemri'];
         $email  = $_POST['email'];
         $pass = $_POST['pass'];
-  
+        $roli = $_POST['roli'];
    
       
-        $user = $pd->userUpdate($emri, $mbiemri, $pass,$email, $id);
-  		header("Location: edit-user.php?id=$id");
+        $user = $pd->userUpdate($emri, $mbiemri, $pass,$email,$roli, $id);
+  		header("Location: users.php");
     }
 
     ?>
@@ -140,23 +140,34 @@ if ($_SESSION['role'] == 0) {
                     </div>
 
                     <div>
-                        <label class="desc" for="Field1"> Emri </label>
+                        <label class="desc"> Emri </label>
                         <div>
                             <input required id="userE" name="emri" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"  tabindex="1">
                         </div>
                     </div>
                     <div>
-                        <label class="desc" for="Field1">Mbiemri</label>
+                        <label class="desc">Mbiemri</label>
                         <div>
                             <input required name="mbiemri" type="text" class="field text fn" value="<?= $user->mbiemri ?>" size="8"  tabindex="1">
                         </div>
                     </div>
                     <div>
-                        <label class="desc" for="Field1">Email</label>
+                        <label class="desc">Email</label>
                         <div>
                             <input required name="email" type="text" class="field text fn" value="<?= $user->email ?>" size="8" tabindex="1">
                         </div>
                     </div>
+                   
+<div>
+                            <label class="desc">Roli</label>
+                            <div>
+ 						<select  name="roli" id="gjinia" required > 
+                        <option value="0" >User</option>
+                        <option value="1" >Admin</option>
+
+                    </select>                            </div>
+                        </div>
+
                     <div>
                         <label class="desc">Ndrysho Passwordin</label>
                         <div>
@@ -164,7 +175,7 @@ if ($_SESSION['role'] == 0) {
                         </div>
                     </div>
                     <div>
-
+   
                     <div>
                         <div>
                              <input class="addProd" name="submit" type="submit" value="Ndrysho">
