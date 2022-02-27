@@ -17,8 +17,8 @@ $total_users = $u->totalRowsU();
 
 $total_pages = ceil($total_users / $num_of_users);
 
-if (isset($_GET['delpro'])) {
-    $id = $_GET['delpro'];
+if (isset($_GET['del'])) {
+    $id = $_GET['del'];
     $delPro = $u->deleleteUserById($id);
     header('Location: users.php');
 }
@@ -152,7 +152,7 @@ if (isset($_GET['delpro'])) {
                             <td><?= $user->gjinia ?></td>
                             <td>
                                 <a href="Edit-user.php?id=<?= $user->id ?>">Edit</a>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $user->id ?>">Delete</a>
+                                <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $user->id ?>">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

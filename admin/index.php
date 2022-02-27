@@ -143,7 +143,7 @@ $total_msg = $db->totalMessages();
             <div class="recentProducts">
                 <div class="cardHeader">
                     <h2>Produktet e fundit</h2>
-                    <a href="/products.php" class="btn">Te gjitha</a>
+                    <a href="products.php" class="btn">Te gjitha</a>
                 </div>
                 <table>
                     <thead>
@@ -171,23 +171,34 @@ $total_msg = $db->totalMessages();
                 </table>
 
             </div>
-            <div class="recentCustomers">
+
+            <div class="recentProducts">
                 <div class="cardHeader">
                     <h2>Klientet e fundit</h2>
+                    <a href="users.php" class="btn">Te gjithe</a>
                 </div>
                 <table class="customerstbl">
+                    <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Emri</td>
+                        <td>Email</td>
+                    </tr>
+                    </thead>
                     <tbody>
+
                     <?php $users = $user->recentUsers(10);
                     foreach ($users
 
                     as $user) : ?>
-                    <tr >
+                    <tr>
+                        <td><?= $user->id ?></td>
+                        <td><?= $user->emri ?></td>
+                        <td><?= $user->email ?></td>
                         <!-- <td width="60px">
                             <div class="imgBx"><img src="img/1.jpg"></div>
                         </td> -->
-                        <td><h4><?= $user->emri ?><br/><span><?= $user->data ?></span></h4></td>
                     </tr>
-                    <tr>
                         <?php endforeach ?>
                     </tbody>
                 </table>
