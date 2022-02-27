@@ -22,7 +22,13 @@ if ($_SESSION['role'] == 0) {
         $pass = $_POST['pass'];
 
         $u->userUpdate($name, $surname, $pass, $email, $id);
-        header("Location: account.php");
+    }
+
+    if (isset($_GET['delacc'])) {
+        $id = $_GET['delacc'];
+        $delacc = $u->deleleteUserById($id);
+        Session::end();
+        header('Location:../index.php');
     }
     ?>
 
@@ -164,7 +170,13 @@ if ($_SESSION['role'] == 0) {
                             </div>
 
                         </div>
+                        
+                        <div>
+                            <div>
+                            <a onclick="return confirm('A jeni te sigurt?')"  href="?delacc=<?= $user->id ?>">Delete</a>
+                            </div>
 
+                        </div>
 
                 </form>
             </div>
