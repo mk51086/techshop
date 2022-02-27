@@ -6,7 +6,7 @@ if ($_SESSION['role'] == 0) {
 </script>';
 } else {
 
-    $u= new User();
+    $u = new User();
     $email = $_SESSION['email'];
     $user = '';
     $name = '';
@@ -14,19 +14,15 @@ if ($_SESSION['role'] == 0) {
     $pass = '';
     $user = $u->getUserbyEmail($email);
 
-    if(isset($_POST['submit'])){
+    if (isset($_POST['acc'])) {
         $id = $user->id;
         $name = $_POST['name'];
         $surname = $_POST['surname'];
-        $email  = $_POST['email'];
+        $email = $_POST['email'];
         $pass = $_POST['pass'];
-        if($pass == null){
-            $pass = $u->pass;
-        }
-        $u->userUpdate($name, $surname,$pass,$email,$id);
-        header("Location: account.php");
-    }
 
+        $u->userUpdate($name, $surname, $pass, $email, $id);
+    }
     ?>
 
 
@@ -135,32 +131,35 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc" for="Field1">Emri </label>
                         <div>
-                            <input name="name" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"  tabindex="1">
+                            <input name="name" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"
+                                   tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Mbiemri</label>
                         <div>
-                            <input name="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>" size="8"  tabindex="1">
+                            <input name="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>"
+                                   size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Email</label>
                         <div>
-                            <input name="email" type="text" class="field text fn" value="<?= $user->email ?>" size="8" tabindex="1">
+                            <input name="email" type="text" class="field text fn" value="<?= $user->email ?>" size="8"
+                                   tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc">Ndrysho Passwordin</label>
                         <div>
-                            <input name="pass" type="text" class="field text fn" value=""   size="8" tabindex="1">
+                            <input name="pass" type="text" class="field text fn" value="" size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
 
                         <div>
                             <div>
-                                <input class="addProd" name="submit" type="submit" value="Ndrysho">
+                                <input class="addProd" name="acc" type="submit" value="Ndrysho">
                             </div>
 
                         </div>

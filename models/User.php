@@ -332,7 +332,11 @@ class User
     public function userUpdate($emri, $mbiemri,$pass,$email,$id)
     {
         $user = $this->getUser($id);
-        $pass = self::passwordHash($pass);
+        if(empty($pass)){
+            $pass = $user->pass;
+        }else {
+            $pass = self::passwordHash($pass);
+        }
         $query = "UPDATE " . User::$table_name . " SET emri = ?, mbiemri = ?, password = ?, email = ? WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $emri  , PDO::PARAM_STR);
