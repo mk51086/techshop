@@ -14,8 +14,15 @@ if (isset($_POST['contact'])) {
     $msg = $_POST['msg'];
 
     $u->contact($email, $emri, $tel, $msg);
-}
 
+$sukses = $u->getNotification(Notification::$contactSuccess);
+
+
+}
+if(isset($sukses)){
+
+    header("refresh:2;url=contact.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -67,9 +74,12 @@ include("header.php");
             <div class="inputfield">
                 <input name="contact" type="submit" value="Dergo" id="submit" class="btn">
             </div>
-            <div class="success-div">
-                <span id="success"></span>
-            </div>
+             <div class="success-div">
+            	<?php 
+					if(isset($sukses)){ ?>
+                    <span class="success" style="color: green;"><?=$sukses?></span>
+<?php } ?>
+                </div>
         </form>
     </div>
 </div>

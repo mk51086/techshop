@@ -21,7 +21,7 @@ $total_messages = ceil($total_messages / $num_of_messages);
 if (isset($_GET['delM'])) {
     $id = $_GET['delM'];
     $delPro = $m->deleteMessages($id);
-    header('Location: Message.php');
+    header('Location: messages.php');
 }
 
 ?>

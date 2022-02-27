@@ -142,7 +142,6 @@ if (!$_SESSION['role']) {
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Product ID</th>
-                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -250,6 +250,7 @@ class User
         self::validateTel($tel);
         self::validateMsg($msg);
         if (empty(self::$notifications) == true) {
+            array_push(self::$notifications, Notification::$contactSuccess);
             $this->db->addMsg($emri, $email, $msg, $tel);
         } else
             return false;

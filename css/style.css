@@ -680,6 +680,11 @@ input:focus {
     cursor: pointer;
 }
 
+.small-img-col img {
+    max-height: 80px;
+    max-width: 100px;
+}
+
 .small-img:hover {
     outline: 1px solid #8e9aaf;
 }

@@ -25,4 +25,5 @@ class Notification
 	public static $telNrOnly = 'Nr i tel duhet te permbaje vetem numra';
     public static $msgEmpty = 'Mesazhi nuk duhet te jete i zbrazet!';
     public static $msgSize = 'Mesazhi duhet te jete mes 10 dhe 255 shkronja!';
+    public static $contactSuccess = 'Mesazhi juaj eshte derguar me sukses!';
 }
