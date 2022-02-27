@@ -22,6 +22,7 @@ if ($_SESSION['role'] == 0) {
         $pass = $_POST['pass'];
 
         $u->userUpdate($name, $surname, $pass, $email, $id);
+        header("Location: account.php");
     }
     ?>
 

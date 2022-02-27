@@ -129,7 +129,7 @@ if (!$_SESSION['role']) {
                 <form action="#" method="post" enctype="multipart/form-data">
 
                     <div class="cardHeader">
-                        <h2>Ndrysho Galleryin</h2>
+                        <h2>Ndrysho Foto</h2>
 
                         <a href="gallery.php" class="btn"><span class="icon"><i class="fa fa-shopping-cart"
                                                                                 aria-hidden="true"></i></span> Te
