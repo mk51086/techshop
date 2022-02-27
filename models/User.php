@@ -299,6 +299,7 @@ class User
         $user->emri = $row['emri'];
         $user->mbiemri = $row['mbiemri'];
         $user->gjinia = $row['gjinia'];
+        $user->role = $row['role'];
         return $user;
     }
 
