@@ -1,12 +1,19 @@
 <?php
 
 include_once 'init.php';
+if(!isset($_GET['id'])){
+    header("Location: 404.php");
+}
 $pd=new Product();
 $product = $pd->getProduct($_GET['id']);
-
+if(empty($product)){
+    header("Location: 404.php");
+}
 $recommended = $pd->getRecommended($_GET['id']);
 $u = new User();
 $user = $u->getUser($product->userID);
+
+
 
 ?>
 <!DOCTYPE html>
