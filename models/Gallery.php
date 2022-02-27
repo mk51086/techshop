@@ -24,7 +24,7 @@ class Gallery{
 
     public function getAllGalleryImagesProduct($id)
     {
-        $query = "SELECT * FROM " . Gallery::$table_name . " WHERE ProductID = ?";;
+        $query = "SELECT * FROM " . Gallery::$table_name . " WHERE ProductID = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1,$id,PDO::PARAM_INT);
         $stmt->execute();
@@ -110,7 +110,7 @@ class Gallery{
     public function galleryUpdate($prod,$unique_img,$id)
     {
         $gallery = $this->getGallery($id);
-        $query = "UPDATE " . Gallery::$table_name . " SET img = ?, ProductID = ? WHERE id = ?";
+        $query = "UPDATE " . Gallery::$table_name . " SET image = ?, ProductID = ? WHERE id = ?";
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $unique_img, PDO::PARAM_STR);
         $stmt->bindParam(2, $prod  , PDO::PARAM_INT);

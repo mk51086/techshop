@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="718e1977-068d-4378-9516-898d4647e379" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/add-slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/add-slider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/File.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/File.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edit-gallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/edit-gallery.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Gallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Gallery.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/gallery/a007ab57d0.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +48,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\techshop\uploads\sliders" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\techshop\admin" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -64,7 +65,7 @@
       <workItem from="1645736299101" duration="52000" />
       <workItem from="1645856482758" duration="43014000" />
       <workItem from="1645916012817" duration="1381000" />
-      <workItem from="1645948204659" duration="11131000" />
+      <workItem from="1645948204659" duration="12619000" />
     </task>
     <servers />
   </component>

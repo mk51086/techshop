@@ -16,10 +16,6 @@ $user = $u->getUser($product->userID);
 $g = new Gallery();
 $galleryItems = $g->getAllGalleryImagesProduct($_GET['id']);
 
-   foreach($galleryItems as $item) :{
-       echo $item->image;
-
-}endforeach;
 ?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
