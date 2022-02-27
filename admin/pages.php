@@ -162,18 +162,18 @@ if (!$_SESSION['role']) {
         </div>
         <div class="page-btn">
             <?php if ($current_page > 1) : ?>
-                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+                <a href="pages.php?p=<?= $current_page - 1 ?>">&#8249;</a>
             <?php endif; ?>
             <?php for ($i = 1; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='pages.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>
             <?php if ($total_pages > ($current_page * $num_of_pages) - $num_of_pages + count($pages)) : ?>
-                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+                <a href="pages.php?p=<?= $current_page + 1 ?>">&#8250;</a>
             <?php endif; ?>
         </div>
     </div>

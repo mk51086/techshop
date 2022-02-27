@@ -21,7 +21,7 @@ if(isset($_POST['order'])) {
     $emri = $_POST['emri'];
     $mbiemri = $_POST['mbiemri'];
     $email = $_POST['email'];
-    $address = $_POST['email'];
+    $address = $_POST['address'];
     $product = $_POST['prodname'];
     $price = $_POST['price'];
 
@@ -57,14 +57,14 @@ include("header.php");
         <form id="register" class="form" action="#" method="POST">
             <div class="inputfield">
                 <label for="prodname">Emri Produktit</label>
-                <input type="text" name="prodname" class="input" id="mbiemri" value="<?=$p->name ?>" required>
+                <input type="text" name="prodname" class="input" id="mbiemri" value="<?=$p->name ?>" required minlength="5" maxlength="50">
                 <small>
 
                 </small>
             </div>
             <div class="inputfield">
                 <label for="price">Cmimi</label>
-                <input type="text" name="price" class="input" id="mbiemri" value="<?=$p->price ?>" readonly>
+                <input type="text" name="price" class="input" id="mbiemri" value="<?=$p->price ?>€" readonly>
                 <small>
 
                 </small>
@@ -72,27 +72,27 @@ include("header.php");
 
             <div class="inputfield">
                 <label for="email">Email Adresa</label>
-                <input type="text" name="email" class="input" id="email" value="<?= $u->email ?>">
+                <input type="text" name="email" class="input" id="email" value="<?= $u->email ?>" minlength="5" maxlength="20">
                 <small>
                 </small>
             </div>
 
             <div class="inputfield">
                 <label for="emri">Emri</label>
-                <input type="text" name="emri" class="input" id="emri" value="<?= $u->emri ?>" required>
+                <input type="text" name="emri" class="input" id="emri" value="<?= $u->emri ?>" required minlength="5" maxlength="20">
                 <small>
                 </small>
             </div>
             <div class="inputfield">
                 <label for="mbiemri">Mbiemri</label>
-                <input type="text" name="mbiemri" class="input" id="mbiemri" value="<?= $u->mbiemri ?>" required>
+                <input type="text" name="mbiemri" class="input" id="mbiemri" value="<?= $u->mbiemri ?>" required minlength="5" maxlength="20">
                 <small>
 
                 </small>
             </div>
             <div class="inputfield">
                 <label for="adresa">Adresa</label>
-                <input type="text" name="address" class="input" id="mbiemri" value="<?=$o->address ?>" required>
+                <input type="text" name="address" class="input" id="mbiemri" value="<?=$o->address ?>" required minlength="5" maxlength="40">
                 <small>
 
                 </small>

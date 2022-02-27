@@ -167,8 +167,8 @@ if (!$_SESSION['role']) {
                                 <hr>
                             </div>
                         </div>
-                        <img src="../uploads/product_images/<?= $gallery->image ?>"
-                             alt="<?php echo $gallery->id ?>" width="50px;">
+                        <img src="../uploads/gallery/<?= $gallery->image ?>"
+                             alt="<?php echo $gallery->id ?>" width="150px;">
                     </div>
                     <div>
                         <div>

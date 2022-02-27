@@ -167,8 +167,8 @@ if (!$_SESSION['role']) {
                   <hr>
                   </div>
             </div>
-        <img src="../uploads/product_images/<?= $slider->image ?>"
-             alt="<?php echo $slider->id ?>" width="50px;">
+        <img src="../uploads/sliders/<?= $slider->image ?>"
+             alt="<?php echo $slider->id ?>" width="200px;">
         </div>
             <div>
                 <div>

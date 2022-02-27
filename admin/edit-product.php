@@ -195,7 +195,7 @@ if (!$_SESSION['role']) {
                             </div>
                         </div>
                         <img src="../uploads/product_images/<?= $product->image; ?>"
-                             alt="<?php echo $product->name ?>" width="50px;">
+                             alt="<?php echo $product->name ?>" width="150px;">
                     </div>
                     <div>
                         <div>
