@@ -62,4 +62,18 @@ class Page{
         }
         return $product;
     }
+
+    public function pageUpdate($title,$content,$id)
+     {
+         $pages = $this->getPage($id);
+         $query = "UPDATE " . page::$table_name . " SET title = ?, content = ?  WHERE  id = ?";
+         $stmt = $this->db->conn->prepare($query);
+         $stmt->bindParam(1, $title  , PDO::PARAM_STR);
+         $stmt->bindParam(2, $content   , PDO::PARAM_STR);
+         $stmt->bindParam(3, $id, PDO::PARAM_INT);
+         $stmt->execute();
+         return $pages;
+     }
+
+
 }
