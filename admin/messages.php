@@ -59,14 +59,14 @@ if (isset($_GET['delpro'])) {
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="users.php">
 
                     <span class="icon"><i class="fa fa-users"></i></span>
                     <span class="title">Klientet</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="messages.php">
 
                     <span class="icon"><i class="fa fa-comment"></i></span>
