@@ -42,6 +42,7 @@ if (isset($_GET['del'])) {
 </head>
 
 <body>
+
 <div class="container">
     <div class="navigation">
         <ul>
@@ -51,7 +52,7 @@ if (isset($_GET['del'])) {
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li>
+            <li >
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -93,7 +94,13 @@ if (isset($_GET['del'])) {
                     <span class="title">Sliders</span>
                 </a>
             </li>
+             <li>
+                <a href="gallery.php">
 
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
+                </a>
+            </li>
             <li>
                 <a href="account.php">
 
@@ -110,6 +117,7 @@ if (isset($_GET['del'])) {
             </li>
         </ul>
     </div>
+
 
 
     <div class="main">

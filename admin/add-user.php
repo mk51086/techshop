@@ -35,71 +35,79 @@ if (!$_SESSION['role']) {
 
 <body>
     <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="index.php">
-                        <span class="icon"><i class="fa fa-laptop"></i></span>
-                        <span class="title"><h2>TECHSHOP</h2></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="index.php">
-                        <span class="icon"><i class="fa fa-home"></i></span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="users.php">
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="index.php">
+                    <span class="icon"><i class="fa fa-laptop"></i></span>
+                    <span class="title"><h2>TECHSHOP</h2></span>
+                </a>
+            </li>
+            <li>
+                <a href="index.php">
 
-                        <span class="icon"><i class="fa fa-users"></i></span>
-                        <span class="title">Klientet</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="messages.php">
+                    <span class="icon"><i class="fa fa-home"></i></span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="users.php">
 
-                        <span class="icon"><i class="fa fa-comment"></i></span>
-                        <span class="title">Mesazhet</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="products.php">
+                    <span class="icon"><i class="fa fa-users"></i></span>
+                    <span class="title">Klientet</span>
+                </a>
+            </li>
+            <li>
+                <a href="messages.php">
 
-                        <span class="icon"><i class="fa fa-shopping-cart"></i></span>
-                        <span class="title">Produktet</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="users.php">
+                    <span class="icon"><i class="fa fa-comment"></i></span>
+                    <span class="title">Mesazhet</span>
+                </a>
+            </li>
+            <li>
+                <a href="products.php">
 
-                        <span class="icon"><i class="fa fa-users"></i></span>
-                        <span class="title">Klientet</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="sliders.php">
+                    <span class="icon"><i class="fa fa-shopping-cart"></i></span>
+                    <span class="title">Produktet</span>
+                </a>
+            </li>
+            <li>
+                <a href="pages.php">
 
-                        <span class="icon"><i class="fa fa-eye"></i></span>
-                        <span class="title">Sliders</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="account.php">
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
+                </a>
+            </li>
+            <li>
+                <a href="sliders.php">
 
-                        <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                        <span class="title">Account</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Sliders</span>
+                </a>
+            </li>
+             <li>
+                <a href="gallery.php">
 
-                        <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-                        <span class="title">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
+                </a>
+            </li>
+            <li>
+                <a href="account.php">
+
+                    <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                    <span class="title">Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="../logout.php">
+
+                    <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 
 
         <div class="main">

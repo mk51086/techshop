@@ -42,6 +42,7 @@ if (!$_SESSION['role']) {
 </head>
 
 <body>
+
 <div class="container">
     <div class="navigation">
         <ul>
@@ -93,6 +94,13 @@ if (!$_SESSION['role']) {
                     <span class="title">Sliders</span>
                 </a>
             </li>
+             <li>
+                <a href="gallery.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
+                </a>
+            </li>
             <li>
                 <a href="account.php">
 
@@ -109,7 +117,6 @@ if (!$_SESSION['role']) {
             </li>
         </ul>
     </div>
-
 
     <div class="main">
         <div class="topbar">
@@ -161,18 +168,18 @@ if (!$_SESSION['role']) {
         </div>
         <div class="page-btn">
             <?php if ($current_page > 1) : ?>
-                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
+                <a href="sliders.php?p=<?= $current_page - 1 ?>">&#8249;</a>
             <?php endif; ?>
             <?php for ($i = 1; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='sliders.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>
             <?php if ($total_sliders > ($current_page * $num_of_sliders) - $num_of_sliders + count($sliders)) : ?>
-                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
+                <a href="sliders.php?p=<?= $current_page + 1 ?>">&#8250;</a>
             <?php endif; ?>
         </div>
     </div>

@@ -93,7 +93,7 @@ if (!$_SESSION['role']) {
                     <span class="title">Sliders</span>
                 </a>
             </li>
-            <li class="active">
+             <li class="active">
                 <a href="gallery.php">
 
                     <span class="icon"><i class="fa fa-eye"></i></span>

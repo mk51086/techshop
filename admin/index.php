@@ -78,6 +78,13 @@ $total_msg = $db->totalMessages();
                     <span class="title">Sliders</span>
                 </a>
             </li>
+             <li>
+                <a href="gallery.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
+                </a>
+            </li>
             <li>
                 <a href="account.php">
 

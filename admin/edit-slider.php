@@ -89,10 +89,24 @@ if (!$_SESSION['role']) {
                 </a>
             </li>
             <li>
+                <a href="pages.php">
+
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
+                </a>
+            </li>
+            <li>
                 <a href="sliders.php">
 
                     <span class="icon"><i class="fa fa-eye"></i></span>
                     <span class="title">Sliders</span>
+                </a>
+            </li>
+             <li>
+                <a href="gallery.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
                 </a>
             </li>
             <li>

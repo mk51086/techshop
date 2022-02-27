@@ -48,6 +48,7 @@ if ($_SESSION['role'] == 0) {
 </head>
 
 <body>
+
 <div class="container">
     <div class="navigation">
         <ul>
@@ -57,7 +58,7 @@ if ($_SESSION['role'] == 0) {
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li>
+            <li >
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -97,6 +98,13 @@ if ($_SESSION['role'] == 0) {
 
                     <span class="icon"><i class="fa fa-eye"></i></span>
                     <span class="title">Sliders</span>
+                </a>
+            </li>
+             <li>
+                <a href="gallery.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
                 </a>
             </li>
             <li class="active">
@@ -172,14 +180,13 @@ if ($_SESSION['role'] == 0) {
                         </div>
                         
                         <div>
-                            <div>
-                            <a onclick="return confirm('A jeni te sigurt?')"  href="?delacc=<?= $user->id ?>">Delete</a>
-                            </div>
+                      
 
                         </div>
 
                 </form>
             </div>
+                           <a style="float:right;margin-top:160px;" onclick="return confirm('A jeni te sigurt?')" href="?delacc=<?= $user->id ?>" class="btn"><span   class="icon"><i class="fa fa-message" aria-hidden="true"></i></span> Shlyej Llogarine</a>
 
         </div>
     </div>

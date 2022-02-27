@@ -66,7 +66,7 @@ if (!$_SESSION['role']) {
                     <span class="title"><h2>TECHSHOP</h2></span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="index.php">
 
                     <span class="icon"><i class="fa fa-home"></i></span>
@@ -95,10 +95,10 @@ if (!$_SESSION['role']) {
                 </a>
             </li>
             <li>
-                <a href="users.php">
+                <a href="pages.php">
 
-                    <span class="icon"><i class="fa fa-users"></i></span>
-                    <span class="title">Klientet</span>
+                    <span class="icon"><i class="fa fa-book"></i></span>
+                    <span class="title">Faqet</span>
                 </a>
             </li>
             <li>
@@ -106,6 +106,13 @@ if (!$_SESSION['role']) {
 
                     <span class="icon"><i class="fa fa-eye"></i></span>
                     <span class="title">Sliders</span>
+                </a>
+            </li>
+             <li>
+                <a href="gallery.php">
+
+                    <span class="icon"><i class="fa fa-eye"></i></span>
+                    <span class="title">Gallery</span>
                 </a>
             </li>
             <li>

@@ -83,6 +83,13 @@ if (!$_SESSION['role']) {
                         <span class="title">Produktet</span>
                     </a>
                 </li>
+                 <li>
+                    <a href="pages.php">
+
+                        <span class="icon"><i class="fa fa-book"></i></span>
+                        <span class="title">Faqet</span>
+                    </a>
+                </li>
                 <li>
                     <a href="sliders.php">
 
