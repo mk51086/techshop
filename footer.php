@@ -28,7 +28,7 @@
                     <ul>
                         <li><a href="contact.php">Kontakt</a></li>
                         <li><a href="about.php">Rreth Nesh </a></li>
-                        <li><a href="#">Termet dhe kushtet</a></li>
+                        <li><a href="terms.php">Termet dhe kushtet</a></li>
                     </ul>
                 </div>
             </div>
