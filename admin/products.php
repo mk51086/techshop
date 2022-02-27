@@ -134,6 +134,7 @@ if (isset($_GET['delpro'])) {
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Foto</th>
                         <th>Emri</th>
                         <th>Cmimi</th>
                         <th>Data</th>
@@ -151,6 +152,8 @@ if (isset($_GET['delpro'])) {
 
                         <tr>
                             <td><?= $product->id ?></td>
+                            <td>  <img src="../uploads/product_images/<?= $product->image ?>"
+                                       alt="<?php echo $product->id ?>" width="50px;"></td>
                             <td><?= $product->name ?></td>
                             <td><?= $product->price ?>€</td>
                             <td><?= $product->data ?></td>

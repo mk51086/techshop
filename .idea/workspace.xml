@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="718e1977-068d-4378-9516-898d4647e379" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/products.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/sliders.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sliders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact-us.php" beforeDir="false" afterPath="$PROJECT_DIR$/contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Slider.php" beforeDir="false" afterPath="$PROJECT_DIR$/models/Slider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/sliders/1.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +64,8 @@
       <workItem from="1645304881863" duration="49000" />
       <workItem from="1645736299101" duration="52000" />
       <workItem from="1645856482758" duration="43014000" />
-      <workItem from="1645916012817" duration="64000" />
+      <workItem from="1645916012817" duration="1381000" />
+      <workItem from="1645948204659" duration="850000" />
     </task>
     <servers />
   </component>

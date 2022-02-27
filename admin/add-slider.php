@@ -1,30 +1,36 @@
 <?php
-include '../init.php';
+include_once("../init.php");
 if (!$_SESSION['role']) {
     echo '<script>alert("Nuk keni qasje ne kete faqe");
             location.href = "../index.php";
-</script>';}else{
+</script>';
+} else {
     $s=new Slider();
+    $img = '';
+    $link = '';
+    $file = '';
 
-    $num_of_sliders = 8;
+    if(isset($_POST['submit'])){
+        $id = $_GET['id'];
+        $img = $_POST['image'];
+        $link = $_POST['link'];
+        $image_tmp = $_FILES['image']['tmp_name'];
+        $img = $_FILES['image']['name'];
+        $div = explode('.', $img);
+        $file_ext = strtolower(end($div));
+        $unique_img = File::makeImageUnique($file_ext);
 
-    $current_page = isset($_GET['p']) && is_numeric($_GET['p']) ? (int)$_GET['p'] : 1;
-
-    $v1 = ($current_page - 1) * $num_of_sliders;
-
-    $sliders = $s->getSlidersPage($v1, $num_of_sliders);
-    $total_sliders = $s->totalRows();
-
-    $total_pages = ceil($total_sliders / $num_of_sliders);
-
-    if (isset($_GET['del'])) {
-        $id = $_GET['del'];
-        $delPro = $s->delSlideId($id);
-        header('Location: sliders.php');
+        $res = File::uploadSliderImage($image_tmp, $unique_img);
+        if (!$res) {
+            echo 'error';
+        } else {
+            echo 'sukses';
+        }
+        $slider = $s->addSlider($link,$unique_img);
+        header("Location: sliders.php");
     }
 
     ?>
-
 
 
     <!DOCTYPE html>
@@ -38,7 +44,7 @@ if (!$_SESSION['role']) {
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <title>TECHSHOP - Produktet</title>
+    <title>TECHSHOP - shto slider</title>
 </head>
 
 <body>
@@ -80,13 +86,6 @@ if (!$_SESSION['role']) {
                 </a>
             </li>
             <li>
-                <a href="pages.php">
-
-                    <span class="icon"><i class="fa fa-book"></i></span>
-                    <span class="title">Faqet</span>
-                </a>
-            </li>
-            <li class="active">
                 <a href="sliders.php">
 
                     <span class="icon"><i class="fa fa-eye"></i></span>
@@ -110,7 +109,6 @@ if (!$_SESSION['role']) {
         </ul>
     </div>
 
-
     <div class="main">
         <div class="topbar">
             <div class="toggle" onclick="toggleMenu()"></div>
@@ -122,64 +120,50 @@ if (!$_SESSION['role']) {
             </div>
         </div>
 
+
         <div class="details">
             <div class="recentProducts">
-                <div class="cardHeader">
-                    <h2>Sliders</h2>
+                <form action="#" method="post" enctype="multipart/form-data">
 
-                    <a href="add-slider.php" class="btn"><span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span> Shto</a>
-                </div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Foto</th>
-                        <th>Link</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
+                    <div class="cardHeader">
+                        <h2>Shto Slider</h2>
 
-                    foreach ($sliders as $slider) : ?>
-                        <tr>
-                            <td><?= $slider->id ?></td>
-                            <td>  <img src="../uploads/sliders/<?= $slider->image ?>"
-                                       alt="<?php echo $slider->id ?>" width="50px;"></td>
-                            <td><?= $slider->link ?></td>
-                            <td>
-                                <a href="edit-slider.php?id=<?= $slider->id ?>">Edit</a>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $slider->id ?>">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
+                        <a href="sliders.php" class="btn"><span class="icon"><i class="fa fa-eye"
+                                                                                aria-hidden="true"></i></span> Te
+                            gjitha</a>
+                    </div>
 
-                    </tbody>
-                </table>
+                    <div>
+                        <label class="desc" for="Field1">Slider Link </label>
+                        <div>
+                            <input name="link" type="text" class="field text fn" value="" size="8"
+                                   tabindex="1">
+                        </div>
+                    </div>
+                    <div>
+
+                        <label class="desc">Foto</label>
+                        <div>
+                            <div>
+                                <input type="file" name="image">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <input class="addProd" name="submit" type="submit" value="Ndrysho">
+                        </div>
+
+                    </div>
+
+                </form>
             </div>
 
         </div>
-        <div class="page-btn">
-            <?php if ($current_page > 1) : ?>
-                <a href="products.php?p=<?= $current_page - 1 ?>">&#8249;</a>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $total_pages; $i++) {
-                if ($i == $current_page) {
-                    echo "<a class='active'>" . $current_page . "</a>";
-                } else {
-                    echo "<a href='products.php?p=" . $i . "'>" . $i . "</a>";
-                }
-            }
-            ?>
-            <?php if ($total_sliders > ($current_page * $num_of_sliders) - $num_of_sliders + count($sliders)) : ?>
-                <a href="products.php?p=<?= $current_page + 1 ?>">&#8250;</a>
-            <?php endif; ?>
-        </div>
     </div>
-</div>
 
-
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
-    </html><?php }?>
+    </html><?php } ?>

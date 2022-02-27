@@ -98,4 +98,13 @@ class Slider{
         return $slider;
     }
 
+    public function addSlider($link,$unique_img)
+    {
+        $query = "INSERT INTO " . Slider::$table_name . " VALUES (NULL,?,?)";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->bindParam(1, $unique_img, PDO::PARAM_STR);
+        $stmt->bindParam(2, $link  , PDO::PARAM_STR);
+        return  $stmt->execute();
+    }
+
 }

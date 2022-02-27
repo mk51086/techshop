@@ -11,7 +11,7 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="products.php">Produktet</a></li>
                         <li><a href="about.php">Rreth nesh</a></li>
-                        <li><a href="contact-us.php">Kontakti</a></li>
+                        <li><a href="contact.php">Kontakti</a></li>
 						  <?php
                     if (isset($_SESSION['email'])) {
                         echo "<li><a href='logout.php' id='loginlink'>Dil</a></li>";
