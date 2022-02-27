@@ -159,8 +159,8 @@ if (isset($_GET['delM'])) {
                             <td><?= $message->mesazhi ?></td>
                             <td><?= $message->tel ?></td>
                             <td>
+   <a href="view-message.php?id=<?= $message->ID ?>">Lexo</a>
                                 <a onclick="return confirm('A jeni te sigurt?')" href="?delM=<?= $message->ID ?>">Delete</a>
-                                <a href="view-message.php?id=<?= $message->ID ?>">Lexo</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

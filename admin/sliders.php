@@ -142,7 +142,6 @@ if (!$_SESSION['role']) {
                         <th>ID</th>
                         <th>Foto</th>
                         <th>Link</th>
-                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -151,12 +150,11 @@ if (!$_SESSION['role']) {
                     foreach ($sliders as $slider) : ?>
                         <tr>
                             <td><?= $slider->id ?></td>
-                            <td>  <img src="../uploads/sliders/<?= $slider->image ?>"
-                                       alt="<?php echo $slider->id ?>" width="50px;"></td>
+                            <td>  <img src="../uploads/sliders/<?= $slider->image ?>" alt="<?php echo $slider->id ?>" width="50px;"></td>
                             <td><?= $slider->link ?></td>
                             <td>
                                 <a href="edit-slider.php?id=<?= $slider->id ?>">Edit</a>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $slider->id ?>">Delete</a>
+       <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $slider->id ?>">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach ?>

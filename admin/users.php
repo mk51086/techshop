@@ -159,7 +159,7 @@ if (isset($_GET['del'])) {
                             <td><?= $user->mbiemri ?></td>
                             <td><?= $user->email ?></td>
                             <td><?= $user->gjinia ?></td>
-                            <td><?= $user->role ?></td>
+                            <td><?= ($user->role===1)?('Admin'):('User') ?></td>
                             <td>
                                 <a href="edit-user.php?id=<?= $user->id ?>">Edit</a>
                                 <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $user->id ?>">Delete</a>

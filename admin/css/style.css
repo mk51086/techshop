@@ -271,13 +271,16 @@ input {
     margin-top: 10px;
 }
 
+.details table thead {
+    align-items: center;
+}
+
 .details table thead td {
     font-weight: 600;
 }
 
 .details .recentProducts table tr {
     border-bottom: 1px solid #8d99ae;
-
 }
 
 .details .recentProducts table td {
@@ -336,7 +339,6 @@ input {
 .inprogress {
     background: #1795ce;
 }
-
 
 @media(max-width:992px) {
     .navigation {

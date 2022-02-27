@@ -84,7 +84,7 @@ class Message {
         $stmt->bindParam(1, $v1, PDO::PARAM_INT);
         $stmt->bindParam(2, $v2, PDO::PARAM_INT);
         $stmt->execute();
-        $mesazhi = [];
+        $mesazhet = [];
         while ($row = $stmt->fetch()) {
             $mesazhi = $this->createMessages($row);
             $mesazhet[]=$mesazhi;

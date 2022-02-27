@@ -57,7 +57,10 @@ $galleryItems = $g->getAllGalleryImagesProduct($_GET['id']);
                     </div>
                 </div>
                 <div class="col-2">
-                    <h5>Autor: <?=$user->emri?></h5>
+ <p>Autor: <b><?=$user->emri?></b></p>
+<br>
+                     <h2><?=$product->name?></h2>
+                   
                     <h4><?=$product->price?>€</h4>
 
                     <label for="sasia" id="lblsasia">Sasia: </label><input id="input-sasia" type="number" value="1"
