@@ -16,12 +16,11 @@ if (isset($_POST['contact'])) {
     $u->contact($email, $emri, $tel, $msg);
 
 $sukses = $u->getNotification(Notification::$contactSuccess);
-
-
-}
-if(isset($sukses)){
+if($sukses!=null){
 
     header("refresh:2;url=contact.php");
+}
+
 }
 
 ?>

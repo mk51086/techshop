@@ -137,13 +137,13 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc" for="Field1">Titulli </label>
                         <div>
-                            <input name="title" type="text" class="field text fn" value="<?= $pages->title ?>" size="8"  tabindex="1">
+                            <input required name="title" type="text" class="field text fn" value="<?= $pages->title ?>" size="8"  tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Permbajtja</label>
                         <div>
-                            <textarea name="content" type="text" class="field text fn" size="8"  tabindex="1" style="height:100px; "><?= $pages->content ?></textarea>
+                            <textarea  required name="content" type="text" class="field text fn" size="8"  tabindex="1" style="height:100px; "><?= $pages->content ?></textarea>
                         </div>
                     </div>
             

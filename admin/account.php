@@ -146,28 +146,28 @@ if ($_SESSION['role'] == 0) {
                     <div>
                         <label class="desc" for="Field1">Emri </label>
                         <div>
-                            <input name="name" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"
+                            <input required name="name" type="text" class="field text fn" value="<?= $user->emri ?>" size="8"
                                    tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Mbiemri</label>
                         <div>
-                            <input name="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>"
+                            <input required ="surname" type="text" class="field text fn" value="<?= $user->mbiemri ?>"
                                    size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Email</label>
                         <div>
-                            <input name="email" type="text" class="field text fn" value="<?= $user->email ?>" size="8"
+                            <input required name="email" type="text" class="field text fn" value="<?= $user->email ?>" size="8"
                                    tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc">Ndrysho Passwordin</label>
                         <div>
-                            <input name="pass" type="text" class="field text fn" value="" size="8" tabindex="1">
+                            <input minlength="8" maxlength="25"  required name="pass" type="text" class="field text fn" value="" size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
