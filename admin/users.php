@@ -98,7 +98,7 @@ if (isset($_GET['del'])) {
                 <a href="account.php">
 
                     <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                    <span class="title">Password</span>
+                    <span class="title">Account</span>
                 </a>
             </li>
             <li>
@@ -153,7 +153,7 @@ if (isset($_GET['del'])) {
                             <td><?= $user->gjinia ?></td>
                             <td><?= $user->role ?></td>
                             <td>
-                                <a href="Edit-user.php?id=<?= $user->id ?>">Edit</a>
+                                <a href="edit-user.php?id=<?= $user->id ?>">Edit</a>
                                 <a onclick="return confirm('A jeni te sigurt?')" href="?del=<?= $user->id ?>">Delete</a>
                             </td>
                         </tr>

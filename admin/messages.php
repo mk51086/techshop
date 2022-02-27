@@ -18,8 +18,8 @@ $total_messages = $m->totalRowsM();
 
 $total_messages = ceil($total_messages / $num_of_messages);
 
-if (isset($_GET['delpro'])) {
-    $id = $_GET['delpro'];
+if (isset($_GET['delM'])) {
+    $id = $_GET['delM'];
     $delPro = $m->deleteMessages($id);
     header('Location: Message.php');
 }
@@ -127,7 +127,7 @@ if (isset($_GET['delpro'])) {
             <div class="recentProducts">
                 <div class="cardHeader">
                     <h2>Te Gjitha mesazhet</h2>
-
+    
                 </div>
                 <table>
                     <thead>
@@ -135,22 +135,25 @@ if (isset($_GET['delpro'])) {
                         <th>ID</th>
                         <th>Emri</th>
                         <th>Email</th>
-                        <th>mesazhi</th>
+                        <th>Mesazhi</th>
                         <th>tel</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
 
-                    foreach ($mesazhet as $messages) : ?>
+                    foreach ($mesazhet as $message) : 
+                        $message->mesazhi = $message->shortDesc($message->mesazhi);
+            ?>
                         <tr>
-                            <td><?= $messages->ID ?></td>
-                            <td><?= $messages->emri ?></td>
-                            <td><?= $messages->email ?></td>
-                            <td><?= $messages->mesazhi ?></td>
-                            <td><?= $messages->tel ?></td>
+                            <td><?= $message->ID ?></td>
+                            <td><?= $message->emri ?></td>
+                            <td><?= $message->email ?></td>
+                            <td><?= $message->mesazhi ?></td>
+                            <td><?= $message->tel ?></td>
                             <td>
-                                <a onclick="return confirm('A jeni te sigurt?')" href="?delpro=<?= $messages->ID ?>">Delete</a>
+                                <a onclick="return confirm('A jeni te sigurt?')" href="?delM=<?= $message->ID ?>">Delete</a>
+                                <a href="view-message.php?id=<?= $message->ID ?>">Lexo</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -168,7 +171,7 @@ if (isset($_GET['delpro'])) {
                 if ($i == $current_page) {
                     echo "<a class='active'>" . $current_page . "</a>";
                 } else {
-                    echo "<a href='Message.php?p=" . $i . "'>" . $i . "</a>";
+                    echo "<a href='messages.php?p=" . $i . "'>" . $i . "</a>";
                 }
             }
             ?>

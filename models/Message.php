@@ -31,13 +31,20 @@ class Message {
         $stmt = $this->db->conn->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         $stmt->execute();
-        $user = null;
+        $mesazhet = null;
         while ($row = $stmt->fetch()) {
            $mesazhet = $this->createMessages($row);
         }
         return $mesazhet;
     }
-
+     public static function shortDesc($text)
+    {
+        if (strlen(substr($text, 0, 100)) <= 100) {
+            return substr($text, 0, 50) . '...';
+        } else {
+            return $text;
+        }
+    }
 
     public function deleteMessages($id)
     {

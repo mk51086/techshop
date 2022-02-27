@@ -41,7 +41,7 @@ class Page{
         return $stmt;
     }
 
-    static public function shortDesc($text)
+     public static function shortDesc($text)
     {
         if (strlen(substr($text, 0, 100)) <= 100) {
             return substr($text, 0, 100) . '...';
