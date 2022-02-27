@@ -82,10 +82,10 @@ class User
         if (password_verify($password, $user->pass)) {
             self::$notifications[] = Notification::$loginSuccess;
             if ($u->role == 1) {
-                Session::setUserAdmin($email);
+                Session::setUserAdmin($email,$u->id);
                 header("refresh:1;url=admin");
             } else if ($u->role == 0) {
-                Session::setUserIfLogged($email);
+                Session::setUserIfLogged($email,$u->id);
                 header("refresh:3;url=index.php");
             }
             return true;

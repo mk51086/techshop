@@ -65,7 +65,7 @@ $galleryItems = $g->getAllGalleryImagesProduct($_GET['id']);
 
                     <label for="sasia" id="lblsasia">Sasia: </label><input id="input-sasia" type="number" value="1"
                         min="1" max="<?=$product->quantity?>" />
-                    <a href="" class="btn">BLEJ</a>
+                    <a href="checkout.php?id=<?=$product->id?>" class="btn">BLEJ</a>
                     <h3>Përshkrimi i produktit
                     </h3>
                     <br />

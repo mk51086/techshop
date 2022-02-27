@@ -4,16 +4,18 @@
 class Session
 {
 
-    public static function setUserIfLogged($user)
+    public static function setUserIfLogged($user,$id)
     {
         $_SESSION['email'] = $user;
         $_SESSION['role'] = false;
+        $_SESSION['id'] = $id;
     }
 
-    public static function setUserAdmin($user)
+    public static function setUserAdmin($user,$id)
     {
         $_SESSION['email'] = $user;
         $_SESSION['role'] = true;
+        $_SESSION['id'] = $id;
     }
 
     public static function start()
