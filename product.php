@@ -13,8 +13,13 @@ $recommended = $pd->getRecommended($_GET['id']);
 $u = new User();
 $user = $u->getUser($product->userID);
 
+$g = new Gallery();
+$galleryItems = $g->getAllGalleryImagesProduct($_GET['id']);
 
+   foreach($galleryItems as $item) :{
+       echo $item->image;
 
+}endforeach;
 ?>
 <!DOCTYPE html>
 <html lang="sq" translate="no">
@@ -42,20 +47,17 @@ $user = $u->getUser($product->userID);
                     <div class="prodimg-div" id="prodarea"><img src="uploads/product_images/<?= $product->image ?>"
                             id="ProductImg" alt="<?=$product->name?>" /></div>
 
-                    <div class="small-img-row">
-                        <div class="small-img-col">
+                        <div class="small-img-row">
+                            <div class="small-img-col">
                             <img src="uploads/product_images/<?= $product->image ?>"
                                 class="small-img selected-prodImg" alt="<?=$product->name?>-1" />
                         </div>
+                            <?php foreach($galleryItems as $item) :?>
                         <div class="small-img-col">
-                            <img src="images/products/<?=$product->id?>-2.jpg" class="small-img"
+                            <img src="uploads/gallery/<?=$item->image?>" class="small-img"
                                 alt="<?=$product->name?>-2">
                         </div>
-                        <div class="small-img-col">
-                            <img src="images/products/<?=$product->id?>-3.jpg" class="small-img"
-                                alt="<?=$product->name?>-3">
-                        </div>
-
+                            <?php endforeach;?>
                     </div>
                 </div>
                 <div class="col-2">

@@ -11,7 +11,6 @@ if (!$_SESSION['role']) {
     $file = '';
 
     if(isset($_POST['submit'])){
-        $id = $_GET['id'];
         $img = $_POST['image'];
         $link = $_POST['link'];
         $image_tmp = $_FILES['image']['tmp_name'];
@@ -152,7 +151,7 @@ if (!$_SESSION['role']) {
                     </div>
                     <div>
                         <div>
-                            <input class="addProd" name="submit" type="submit" value="Ndrysho">
+                            <input class="addProd" name="submit" type="submit" value="Shto">
                         </div>
 
                     </div>

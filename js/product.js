@@ -20,21 +20,36 @@ img_area.addEventListener("mouseleave", function() {
 //Ndryshimi i fotove te produkti
 const ProductImg = document.getElementById("ProductImg");
 const smallImg = document.getElementsByClassName("small-img");
-smallImg[0].onclick = function() {
-    ProductImg.src = smallImg[0].src;
-    smallImg[0].classList.add("selected-prodImg");
-    smallImg[1].classList.remove("selected-prodImg");
-    smallImg[2].classList.remove("selected-prodImg");
-};
-smallImg[1].onclick = function() {
-    ProductImg.src = smallImg[1].src;
-    smallImg[1].classList.add("selected-prodImg");
-    smallImg[0].classList.remove("selected-prodImg");
-    smallImg[2].classList.remove("selected-prodImg");
-};
-smallImg[2].onclick = function() {
-    ProductImg.src = smallImg[2].src;
-    smallImg[2].classList.add("selected-prodImg");
-    smallImg[0].classList.remove("selected-prodImg");
-    smallImg[1].classList.remove("selected-prodImg");
-};
+
+console.log(smallImg.length)
+
+for(let i = 0;i<smallImg.length;i++){
+    smallImg[i].onclick = function() {
+        ProductImg.src = smallImg[i].src;
+        smallImg[i].classList.add("selected-prodImg");
+        for(let j=0;j<smallImg.length;j++){
+            if(j!==i){
+                smallImg[j].classList.remove("selected-prodImg");
+            }
+        }
+    };
+}
+
+// smallImg[0].onclick = function() {
+//     ProductImg.src = smallImg[0].src;
+//     smallImg[0].classList.add("selected-prodImg");
+//     smallImg[1].classList.remove("selected-prodImg");
+//     smallImg[2].classList.remove("selected-prodImg");
+// };
+// smallImg[1].onclick = function() {
+//     ProductImg.src = smallImg[1].src;
+//     smallImg[1].classList.add("selected-prodImg");
+//     smallImg[0].classList.remove("selected-prodImg");
+//     smallImg[2].classList.remove("selected-prodImg");
+// };
+// smallImg[2].onclick = function() {
+//     ProductImg.src = smallImg[2].src;
+//     smallImg[2].classList.add("selected-prodImg");
+//     smallImg[0].classList.remove("selected-prodImg");
+//     smallImg[1].classList.remove("selected-prodImg");
+// };

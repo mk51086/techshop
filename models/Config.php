@@ -23,10 +23,10 @@ class Config
         return self::getRoot() . 'uploads/sliders/';
     }
 
-    public static function getMediaUserRoot()
-    {
-        return self::getRoot() . 'uploads/user_images/';
+    public static function getGalleryRoot(){
+        return self::getRoot() . 'uploads/gallery/';
     }
+
     public static function getMediaProductImageUrl()
     {
         $protocol = strtolower(substr($_SERVER["SERVER_PROTOCOL"], 0, 5)) == 'https://' ? 'https://' : 'http://';

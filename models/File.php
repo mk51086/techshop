@@ -31,4 +31,13 @@ class File{
         self::delete(Config::getSliderRoot() . $name);
     }
 
+    public static function uploadGalleryImage($tmp_image, $image){
+        return move_uploaded_file($tmp_image, Config::getGalleryRoot() . $image);
+    }
+
+    public static function deleteGalleryImage($name)
+    {
+        self::delete(Config::getGalleryRoot() . $name);
+    }
+
 }
