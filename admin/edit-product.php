@@ -159,28 +159,28 @@ if (!$_SESSION['role']) {
                     <div>
                         <label class="desc" for="Field1">Emri Produktit</label>
                         <div>
-                            <input name="name" type="text" class="field text fn" value="<?= $product->name ?>" size="8"
+                            <input required name="name" type="text" class="field text fn" value="<?= $product->name ?>" size="8"
                                    tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Pershkrimi</label>
                         <div>
-                            <input name="desc" type="text" class="field text fn" value="<?= $product->desc ?>" size="8"
+                            <input required name="desc" type="text" class="field text fn" value="<?= $product->desc ?>" size="8"
                                    tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc" for="Field1">Cmimi</label>
                         <div>
-                            <input name="price" type="text" class="field text fn" value="<?= $product->price ?>"
+                            <input required name="price" type="text" class="field text fn" value="<?= $product->price ?>"
                                    size="8" tabindex="1">
                         </div>
                     </div>
                     <div>
                         <label class="desc">Sasia</label>
                         <div>
-                            <input name="quantity" type="text" class="field text fn" value="<?= $product->quantity ?>"
+                            <input required name="quantity" type="text" class="field text fn" value="<?= $product->quantity ?>"
                                    size="8" tabindex="1">
                         </div>
                     </div>

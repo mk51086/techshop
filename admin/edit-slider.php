@@ -153,7 +153,7 @@ if (!$_SESSION['role']) {
                     <div>
                         <label class="desc" for="Field1">Slider Link </label>
                         <div>
-                            <input name="link" type="text" class="field text fn" value="<?= $slider->link ?>" size="8"
+                            <input required name="link" type="text" class="field text fn" value="<?= $slider->link ?>" size="8"
                                    tabindex="1">
                         </div>
                     </div>

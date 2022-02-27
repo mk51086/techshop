@@ -149,25 +149,25 @@ if (!$_SESSION['role']) {
                         <div>
                             <label class="desc" for="Field1">Emri Produktit</label>
                             <div>
-                                <input name="emri" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="emri" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc" for="Field1">Pershkrimi</label>
                             <div>
-                                <input name="desc" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="desc" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc" for="Field1">Cmimi</label>
                             <div>
-                                <input name="cmimi" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="cmimi" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc">Sasia</label>
                             <div>
-                                <input name="sasia" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="sasia" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>

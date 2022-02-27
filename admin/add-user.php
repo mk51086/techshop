@@ -134,31 +134,31 @@ if (!$_SESSION['role']) {
                         <div>
                             <label class="desc" >Emri</label>
                             <div>
-                                <input name="emri" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="emri" id="emriU" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc" >Mbiemri</label>
                             <div>
-                                <input name="mbiemri" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="mbiemri" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc" >Password</label>
                             <div>
-                                <input name="password" type="password" class="field text fn" value="" size="8" tabindex="1">
+                                <input minlength="8" maxlength="25" required name="password" type="password" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
                         <div>
                             <label class="desc">Email</label>
                             <div>
-                                <input name="email" type="text" class="field text fn" value="" size="8" tabindex="1">
+                                <input required name="email" type="text" class="field text fn" value="" size="8" tabindex="1">
                             </div>
                         </div>
  <div>
                             <label class="desc">Gjinia</label>
                             <div>
- 						<select  name="gjinia" id="gjinia" > 
+ 						<select  name="gjinia" id="gjinia" required > 
                         <option value=""  <?php if($gjinia==''){ echo 'selected' ?> <?php }?>>Zgjidhni</option>
                         <option value="m"  <?php if($gjinia=='m'){ echo 'selected' ?> <?php }?>>Mashkull</option>
                         <option value="f" <?php if($gjinia=='f'){ echo 'selected' ?> <?php }?>>Femër</option>
