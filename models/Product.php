@@ -138,7 +138,7 @@
          $query = "UPDATE " . Product::$table_name . " SET Name = ?, Price = ?, Description = ?, quantity = ?, image = ?, User_ID = ? WHERE ProductID = ?";
          $stmt = $this->db->conn->prepare($query);
          $stmt->bindParam(1, $name  , PDO::PARAM_STR);
-         $stmt->bindParam(2, $price   , PDO::PARAM_INT);
+         $stmt->bindParam(2, $price  , PDO::PARAM_INT);
          $stmt->bindParam(3, $desc  , PDO::PARAM_STR);
          $stmt->bindParam(4, $quantity, PDO::PARAM_INT);
          $stmt->bindParam(5, $unique_img, PDO::PARAM_STR);
